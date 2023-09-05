@@ -1,0 +1,125 @@
+﻿html, body {
+	height:100%;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+}
+body {
+	background:#888;
+	color:#555;
+	text-align:center;
+	font-family:Arial;
+}
+h1 {
+	color:#fff;
+	text-transform:uppercase;
+	text-shadow:0px 0px 20px rgba(0, 0, 0, 0.4);
+}
+#chat {
+	margin:0 auto;
+	width:70%;
+	max-width:500px;
+	height: calc(100% - 80px - 40px - 60px); /* 80px = marge haute, 40px = marge basse, 60px = padding vertical */
+	padding:30px;
+	background:#fff;
+	border-radius:14px;
+	font-size:0;
+	box-shadow:0px 0px 20px 0 rgba(0, 0, 0, 0.3);
+}
+#messages {
+	height:calc(100% - 15px - 60px); /* 15px = padding-top, 60px = formulaire en dessous  */
+	padding-top:15px;
+	width:100%;
+	overflow-y:scroll;
+	margin-bottom:20px;
+	font-size:12px;
+	border-top-left-radius:8px;
+	border-bottom-left-radius:8px;
+	border-right: solid 1px #eaeaea;
+        border-bottom: solid 2px #DDD;
+	background:#eee;
+	text-align: left;
+}
+#messages .message {
+	padding:4px 20px;
+}
+#messages .message:nth-child(2n) {
+	background:rgba(0, 0, 0, .02);
+}
+#message-input {
+	display:inline-block;
+	border:solid 2px #888;
+	width:calc(100% - 144px);
+	padding:0 20px;
+	height:31px;
+	border-top-left-radius:8px;
+	border-bottom-left-radius:8px;
+	border-right:none;
+	transition:all .4s;
+}
+#send-message {
+	display:inline-block;
+	border:solid 2px #888;
+	background:0;
+	width:100px;
+	padding:8px 0;
+	text-transform:uppercase;
+	font-weight:bold;
+	color:inherit;
+	background:#888;
+	color:#fff;
+	border-top-right-radius:8px;
+	border-bottom-right-radius:8px;
+	cursor:pointer;
+	transition:all .4s;
+}
+#message-input:focus {
+	outline:none;
+	border-color:#666;
+}
+#send-message:focus {
+	outline:none;
+}
+#message-input:focus + #send-message {
+	border-color:#666;
+	background:#777;
+}
+#messages .message .user {
+	font-weight:bold;
+}
+#messages .message .user:after {
+	content:': ';
+}
+
+#help {
+        position:absolute;
+        right:10px;
+        top:10px;
+}
+#help-toggle {
+        width:30px;
+        height:30px;
+        line-height:30px;
+        vertical-align:middle;
+        background:#777;
+        color:#FFF;
+        font-size:24px;
+        font-weight:bold;
+        border-radius:50%;
+        cursor:pointer;
+}
+#help-content {
+        display:none;
+        position: absolute;
+        width: 400px;
+        background: #555;
+        color:#fff;
+        top: 25px;
+        right: 0;
+        padding: 20px;
+        list-style: none;
+        font-size: 14px;
+        text-align: left;
+        box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
+        border-radius: 3px;
+}
