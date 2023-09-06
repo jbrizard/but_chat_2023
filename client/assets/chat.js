@@ -50,6 +50,7 @@ function receiveMessage(data)
 {
 	$('#chat #messages').append(
 		'<div class="message">'
+			+ "<img class='avatar' src='" + data.avatar + "' />"
 			+ '<span class="user">' + data.name  + '</span> ' 
 			+ data.message 
 	     + '</div>'

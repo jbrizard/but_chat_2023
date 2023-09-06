@@ -34,7 +34,13 @@
 						</li>
 				</ul>
 		</div>
+
+        <form>
+            <label for="add-avatar">Ajouter votre avatar</label>
+            <input onchange="upload(this.files)" type="file" id="add-avatar" accept="image/*" />
+        </form>
 		
         <script type="text/javascript" src="chat.js"></script>
+        <script type="text/javascript" src="/modules/avatar/avatar.js"></script>
     </body>
 </html>
