@@ -1,40 +1,40 @@
 ﻿<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	
-		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="/socket.io/socket.io.js"></script>	<!-- fichier injecté par NodeJS -->
-		
-		<link rel="stylesheet" href="style.css" />
-		<link rel="stylesheet" href="/modules/daffy/daffy.css" />
-	</head>
-	
-	<body>
-		<h1>Le Chat !</h1>
-		
-		<div id="chat">
-			<div id="messages">
-				
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script> <!-- fichier injecté par NodeJS -->
+        
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="/modules/daffy/daffy.css" />
+    </head>
+    
+    <body>
+        <h1>Le Chat !</h1>
+        
+        <div id="chat">
+            <div id="messages">
+                
+            </div>
+			
+			<div id="tools">
+					<input type="text" id="message-input" />
+					
+					<input type="button" id="send-message" value="Envoyer" />
 			</div>
-                        
-                        <div id="tools">
-                                <input type="text" id="message-input" />
-                                
-                                <input type="button" id="send-message" value="Envoyer" />
-                        </div>
+        </div>
+        
+		<div id="help">
+				<div id="help-toggle">?</div>
+				<ul id="help-content">
+						<li>
+								<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
+						</li>
+				</ul>
 		</div>
 		
-                <div id="help">
-                        <div id="help-toggle">?</div>
-                        <ul id="help-content">
-                                <li>
-                                        <strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
-                                </li>
-                        </ul>
-                </div>
-                
-		<script type="text/javascript" src="chat.js"></script>
-	</body>
+        <script type="text/javascript" src="chat.js"></script>
+    </body>
 </html>
