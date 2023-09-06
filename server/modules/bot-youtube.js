@@ -23,23 +23,18 @@ youTube.setKey('AIzaSyAZvHRVOdjklHIwt9kw1Laih0VIovM-RjM');
  */
 function handleYoutube(io, message) 
 {
-    // Est-ce que l'on apelle le bot youtube
+    // Est-ce que l'on appelle le bot youtube ?
     if (message.includes('/youtube')) 
     {
-        youTube.search(message.replace('/youtube',''), 2, function(error, result) {
-            if (error) 
-            {
-              console.log(error);
-            }
-
-            else 
-            {
+        // Si oui, lancer une recherche Youtube 
+        youTube.search(message.replace('/youtube',''), 2, function(error, result) 
+        {
+                //Faire un message avec la vidéo youtube
                 io.sockets.emit('new_message', 
                 {
-                  name: '',
+                  name: 'Youtube',
                   message: `<iframe class="bot-youtube" src="https://www.youtube.com/embed/${result.items[0].id.videoId}"> </iframe>`
                 });
-            }
           });
     }
 }
