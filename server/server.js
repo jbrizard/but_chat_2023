@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var feedback  = require('./modules/feedback.js');
 
 // Initialisation du serveur HTTP
 var app = express();
