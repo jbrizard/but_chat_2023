@@ -44,19 +44,16 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message, avatar: "http://placehold.it/20x20"});
+		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar });
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 	});
 
-	socket.on("upload", (file, callback) => {
-		console.log(file); // <Buffer 25 50 44 ...>
-	
-		// Enregistre le fichier temporairement
-		fs.writeFile("../tmp/upload", file, (err) => {
-		  callback({ message: err ? "failure" : "success" });
-		});
+	// Utilisation du module avatar pour uploader une image
+	socket.on("upload", (image, callback) => {
+		avatar.addAvatar(io, socket, image, callback);
+		
 	  });
 });
 

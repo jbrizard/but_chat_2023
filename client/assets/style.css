@@ -125,9 +125,10 @@ h1 {
 }
 
 .avatar {
-	width: 25px;
-	height: 25px;
+	width: 35px;
+	height: 35px;
 	border-radius: 50%;
 	object-fit: cover;
 	margin: 5px 10px;
+	background-color: #fff;
 }
