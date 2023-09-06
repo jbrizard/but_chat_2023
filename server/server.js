@@ -49,6 +49,18 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 	});
+
+	// Un utilisateur est en train d'écrire
+	socket.on('writing', function(writing)
+	{
+		if (writing) {
+			feedback.writing(io, socket.name, socket.id);
+		}
+		else
+		{
+			feedback.stopWriting(io, socket.name, socket.id);
+		}
+	})
 });
 
 // Lance le serveur sur le port 8090 (http://localhost:8090)
