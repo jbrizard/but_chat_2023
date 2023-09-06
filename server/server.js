@@ -11,10 +11,11 @@ var daffy = require('./modules/daffy.js');
 
 // Initialisation du serveur HTTP
 var app = express();
+
 var server = http.createServer(app);
 
 // Initialisation du websocket
-var io = ioLib.listen(server)
+var io = ioLib(server);
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
