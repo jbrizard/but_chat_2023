@@ -67,7 +67,7 @@ io.sockets.on('connection', function(socket)
 
 	socket.on('send_gif', function(data)
 	{
-		gifAPI.handleGif(io, socket, {name: socket.name, data: data});
+		gifAPI.handleGif(io, {name: socket.name, data: data});
 	});
 });
 

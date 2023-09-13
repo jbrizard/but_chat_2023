@@ -26,6 +26,6 @@ function handleSearch(io, socket, search_term){
 
 }
 
-function handleGif(io, socket, data){
+function handleGif(io, data){
     io.sockets.emit('receive_gif', data);
 }
