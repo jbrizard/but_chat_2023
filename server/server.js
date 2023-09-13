@@ -39,6 +39,7 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+		socket.avatar = "./modules/avatar/defaultAvatar.png"
 
 		// Envoyer l'historique des messages au nouveau client qui se connecte
 		history.getHistory(io, socket, messageHistory, name);
