@@ -57,5 +57,5 @@ function receiveMessage(data)
 			+ '</div>'
 	     + '</div>'
 	)
-	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneu
 }

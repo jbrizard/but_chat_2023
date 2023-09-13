@@ -1,0 +1,11 @@
+.welcomeUser {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px;
+}
+
+.welcomeUser > span {
+    font-style: italic;
+}

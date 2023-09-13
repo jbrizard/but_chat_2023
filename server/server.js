@@ -38,9 +38,15 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+
+		// Envoyer l'historique des messages au nouveau client qui se connecte
+		socket.emit('messageHistory', messageHistory)
+		// Message de connection dans le chat
+		io.sockets.emit('welcome', name);
+		// Ajouter le message de connection dans l'historique
+		messageHistory.push({name:socket.name, message:null, socketId: socket.id, avatar: socket.avatar });
 	});
-	// Envoyer l'historique des messages au nouveau client qui se connecte
-	socket.emit('messageHistory', messageHistory);
+	;
 	
 	// Réception d'un message
 	socket.on('message', function(message)
@@ -61,7 +67,7 @@ io.sockets.on('connection', function(socket)
 	// Utilisation du module avatar pour uploader une image
 	socket.on("upload", (image, callback) => 
 	{
-		avatar.addAvatar(io, socket, image, callback);
+		avatar.addAvatar(io, socket, image, callback, messageHistory);
 	});
 });
 
