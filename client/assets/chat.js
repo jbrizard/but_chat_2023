@@ -41,6 +41,9 @@ function sendMessage()
 	
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
+
+	// Envoi le message au serveur pour feedback
+	socket.emit('writing', false);
 }
 
 /**
