@@ -1,0 +1,50 @@
+.bot-youtube{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 100%;
+    height: 40vh;
+    border: solid 5px black;
+    vertical-align: middle;
+}
+#bot-youtube {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50vw;
+    max-height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 50vh;
+    background-color: red;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+#youtube-results {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+.hidden {
+    display: none;
+}
+#open-youtube:focus  {
+	outline:none;
+}
+#open-youtube {
+	display:inline-block;
+	border:solid 2px #4b4444;
+	background:0;
+	width:100px;
+	padding:8px 0;
+	text-transform:uppercase;
+	font-weight:bold;
+	margin: 3px;
+	color:inherit;
+	background:#cc4444;
+	color:#fff;
+	border-radius:8px;
+	cursor:pointer;
+	transition:all .4s;
+}

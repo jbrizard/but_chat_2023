@@ -16,25 +16,25 @@ var YouTube = require('youtube-node');
 var youTube = new YouTube();
 
 // Entre la clé unique pour utiliser l'API Youtube
-youTube.setKey();
+youTube.setKey('AIzaSyCvhVH3bWqHvUE2MILcejO2NRY-7NcHigg');
 
 /**
  * Le bot renvoie une vidéo youtube basé sur ce que l'utilisateur rentre
  */
-function handleYoutube(io, message) 
+function handleYoutube(io, youtubeSearch) 
 {
-    // Est-ce que l'on appelle le bot youtube ?
-    if (message.includes('/youtube')) 
-    {
-        // Si oui, lancer une recherche Youtube 
-        youTube.search(message.replace('/youtube',''), 2, function(error, result) 
-        {
-                //Faire un message avec la vidéo youtube
-                io.sockets.emit('new_message', 
-                {
-                  name: 'Youtube',
-                  message: `<iframe class="bot-youtube" src="https://www.youtube.com/embed/${result.items[0].id.videoId}"> </iframe>`
-                });
-          });
-    }
+   
+  youTube.search(youtubeSearch, 2, function(error, result) {
+    // Emit a message with the YouTube video data
+    result.items.forEach(video => {
+        io.sockets.emit('new_youtubeSearch', {
+            youtubeThumbnail: `<img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.thumbnails.default.url}" class="youtube-thumbnail">`,
+            youtubeTitle: `<span>${video.snippet.title}</span>`,
+            youtubeId: video.id.videoId 
+        });
+    });
+});
+
 }
+
+//</span><br><iframe fs="0" controls="0" color="blue" class="bot-youtube" src="https://www.youtube.com/embed/${result.items[0].id.videoId}?modestbranding=0&autostart=1&controls=0&showinfo=0"> </iframe>

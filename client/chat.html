@@ -6,9 +6,10 @@
     
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script> <!-- fichier injecté par NodeJS -->
-        
+        <script src="/modules/bot-youtube/bot-youtube.js" defer></script>
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="/modules/daffy/daffy.css" />
+        <link rel="stylesheet" href="/modules/bot-youtube/bot-youtube.css" />
     </head>
     
     <body>
@@ -23,9 +24,14 @@
 					<input type="text" id="message-input" />
 					
 					<input type="button" id="send-message" value="Envoyer" />
+                    <input type="button" id="open-youtube" value="Youtube" />
 			</div>
         </div>
-        
+        <div id="bot-youtube" class="hidden">
+            <input type="text" id="message-youtube" />
+            <input type="button" id="send-youtube" value="Envoyer" />
+            <div id="youtube-results"></div>
+        </div>
 		<div id="help">
 				<div id="help-toggle">?</div>
 				<ul id="help-content">
