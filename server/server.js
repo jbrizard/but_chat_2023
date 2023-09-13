@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var avatar = require('./modules/avatar.js');
+var history = require('./modules/history.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -40,13 +41,8 @@ io.sockets.on('connection', function(socket)
 		socket.name = name;
 
 		// Envoyer l'historique des messages au nouveau client qui se connecte
-		socket.emit('messageHistory', messageHistory)
-		// Message de connection dans le chat
-		io.sockets.emit('welcome', name);
-		// Connaitre mon id
-		socket.emit('myId', socket.id);
-		// Ajouter le message de connection dans l'historique
-		messageHistory.push({name:socket.name, message:null, socketId: socket.id, avatar: socket.avatar });
+		history.getHistory(io, socket, messageHistory, name);
+		
 	});
 	;
 	

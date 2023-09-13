@@ -49,7 +49,7 @@ function sendMessage()
 function receiveMessage(data)
 {
 	$('#chat #messages').append(
-		'<div class="message">'
+		'<div id="' + data.socketId + Date.now() + '" class="message message-' + data.socketId + '">'
 			+ `<img class='avatar ${data.socketId}' src="${ data.avatar ? data.avatar : "./modules/avatar/defaultAvatar.png" }"  />`
 			+ '<div class="message-container">'
 			+ '<span class="user">' + data.name  + '</span> ' 

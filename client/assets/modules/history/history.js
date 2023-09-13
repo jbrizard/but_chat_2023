@@ -21,7 +21,7 @@ function receiveMessage(data)
 	{
 		// Affiche le message de l'historique
 		$('#chat #messages').append(
-			'<div class="message">'
+			'<div class="message message-' + data.socketId + '">'
 				+ `<img class='avatar ${data.socketId}' src="${ data.avatar ? data.avatar : "./modules/avatar/defaultAvatar.png" }"  />`
 				+ '<div class="message-container">'
 				+ '<span class="user">' + data.name  + '</span> ' 
