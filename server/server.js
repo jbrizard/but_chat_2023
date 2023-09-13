@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var feedback  = require('./modules/feedback.js');
+var connected  = require('./modules/connected.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -35,7 +36,10 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+
+		connected.connected(io,io.sockets.sockets);
 	});
+
 	
 	// Réception d'un message
 	socket.on('message', function(message)
@@ -61,7 +65,10 @@ io.sockets.on('connection', function(socket)
 			feedback.stopWriting(io, socket.name, socket.id);
 		}
 	})
+
+	
 });
+
 
 // Lance le serveur sur le port 8090 (http://localhost:8090)
 server.listen(8090);
