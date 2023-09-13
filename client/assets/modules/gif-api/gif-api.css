@@ -1,0 +1,81 @@
+#gif-panel{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    overflow: hidden;
+
+    width: 25vw;
+    height: 50vh;
+    top: 0;left: 0;
+
+    background-color: rgb(70, 70, 70);
+    border-radius: 0 0 10px 0;
+}
+
+
+#gif-panel>#search{
+    margin-top: 5px;
+    margin-bottom: 1vh;
+    width: 80%;
+
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    height: 27px;
+}
+
+#gif-panel>#search>input{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    translate: 0 -55%;
+
+    text-align: center;
+    height: 100%;
+    width: 100%;
+
+    border: none;
+}
+
+#gif-panel>#search>button{
+    position: absolute;
+    right: 2px;
+    top: 2px;
+
+    border-radius: 100%;
+    border: none;
+
+    background-color: rgb(151, 0, 151);
+    color: white;
+    font-weight: bold;
+
+    aspect-ratio: 1;
+    height: calc(100% - 4px);
+    width: auto;
+    cursor: pointer;
+}
+
+
+
+
+#gif-panel>#results{
+    padding: 10% 1vh;
+    width: 95%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    overflow: scroll;
+}
+
+#gif-panel>#results img{
+    width: 100%;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+#gif-panel>#results img:hover{
+    transition: 0.5s;
+    outline: 5px solid rgb(151, 0, 151);
+}

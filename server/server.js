@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var basket = require('./modules/basket.js');
+var gifAPI = require('./modules/gif-api.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -57,6 +58,16 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
+	});
+
+	socket.on('search_gif', function(search_term)
+	{
+		gifAPI.handleSearch(io, socket, search_term);
+	});
+
+	socket.on('send_gif', function(data)
+	{
+		gifAPI.handleGif(io, socket, {name: socket.name, data: data});
 	});
 });
 
