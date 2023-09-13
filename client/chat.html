@@ -9,6 +9,7 @@
         
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="/modules/daffy/daffy.css" />
+        <link rel="stylesheet" href="/modules/avatar/avatar.css" />
     </head>
     
     <body>
@@ -35,10 +36,16 @@
 				</ul>
 		</div>
 
-        <form>
-            <label for="add-avatar">Ajouter votre avatar</label>
-            <input onchange="upload(this.files)" type="file" id="add-avatar" accept="image/png image/jpeg image/jpg image/gif " />
-        </form>
+        <div class="avatar-upload">
+            <div class="avatar-edit">
+                <input onchange="upload(this.files)" type="file" id="add-avatar" accept=".png, .jpg, .jpeg .gif" />
+                <label for="add-avatar"></label>
+            </div>
+            <div class="avatar-preview">
+                <div id="imagePreview">
+                </div>
+            </div>
+        </div>
 		
         <script type="text/javascript" src="chat.js"></script>
         <script type="text/javascript" src="/modules/avatar/avatar.js"></script>

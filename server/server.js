@@ -51,10 +51,10 @@ io.sockets.on('connection', function(socket)
 	});
 
 	// Utilisation du module avatar pour uploader une image
-	socket.on("upload", (image, callback) => {
+	socket.on("upload", (image, callback) => 
+	{
 		avatar.addAvatar(io, socket, image, callback);
-		
-	  });
+	});
 });
 
 // Lance le serveur sur le port 8090 (http://localhost:8090)
