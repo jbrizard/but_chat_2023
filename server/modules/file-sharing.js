@@ -26,8 +26,6 @@ function handleFile(io, props, socket)
 	blob = props.blob;
 	format = mime.lookup(props.name);
 
-	console.log(format);
-
 	fileId = uuidv4();
 	
 	fs.writeFile('../client/assets/uploads/'+fileId+props.name, blob, err => {
