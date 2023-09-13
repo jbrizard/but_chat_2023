@@ -10,7 +10,7 @@ $('#create-survey').click(sendSurvey);
  */
 function sendSurvey()
 {
-	// Récupère le message, puis vide le champ texte
+	// Récupère les infos du sondage, puis vide les champs de texte
 	var surveyInput = $('#survey-input');
 	var choice1Input = $('#choice1');
 	var choice2Input = $('#choice2');
@@ -22,11 +22,11 @@ function sendSurvey()
 	choice1Input.val('');
 	choice2Input.val('');
 	
-	// On n'envoie pas un message vide
+	// On n'envoie pas un sondage vide
 	if (survey == '' || choice1 == '' || choice2 == '' )
 		return;
 	
-	// Envoi le message au serveur pour broadcast
+	// Envoi le sondage au serveur pour broadcast
 	socket.emit('survey', survey);
 	}
 
@@ -35,13 +35,16 @@ function sendSurvey()
  */
 function receiveTime(data)
 {
+	// Cré l'emplacement du timer
 	$('#surveys').append(
 		'<span id="timer"></span>'
 	)
 	
+	// Créé la variable du timer et le rempli avec les infos du timer venant du serveur
 	const timerElement = document.getElementById("timer");
 	timerElement.innerText = `${data.minutes}:${data.secondes}`;
 	
+	// Supprime le timer si le timer arrive à 0
 	if (data.secondes == 0)
 	{
 		timerElement.innerText = '';
@@ -53,6 +56,7 @@ function receiveTime(data)
  */
 function receiveSurvey(data)
 {	
+	// Vide le conteneur avec la classe survey  et le rempli en fonction des informations de sondage du serveur
 	$('.survey').replaceWith('');
 	$('#surveys').append(
 		'<div class="survey">'
@@ -69,9 +73,11 @@ function receiveSurvey(data)
 	     + '</div>'
 	)
 
+	// Initialise les variables de bouttons
 	var button1 = $('#surveyButton1');
 	var button2 = $('#surveyButton2');
 	
+	// 
 	button1.click(surveyClickCount);
 	button2.click(surveyClickCount);
 }
