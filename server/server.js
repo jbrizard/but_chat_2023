@@ -30,7 +30,7 @@ app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 // Gestion des connexions au socket
 io.sockets.on('connection', function(socket)
 {
-	survey.handleNewConnection(socket);
+	survey.handleNewConnection(socket, io);
 
 	// Arrivée d'un utilisateur
 	socket.on('user_enter', function(name)

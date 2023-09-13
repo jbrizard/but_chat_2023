@@ -9,35 +9,44 @@ module.exports =  {
 	handleNewConnection: handleNewConnection, // permet d'appeler cette méthode dans server.js
 }
 
-var numVote = 0;
+var numVote1 = 0;
 var numVote2 = 0;
 
-function handleNewConnection(socket)
+function handleNewConnection(socket, io)
 {
     socket.on('survey', function(survey)
     {
         // Par sécurité, on encode les caractères spéciaux
         // survey = ent.encode(survey.surveyValue);
-
+        numVote1 = 0;
+        numVote2 = 0;
+            
         // Transmet le message à tous les utilisateurs (broadcast)
-        io.sockets.emit('new_survey', {name:socket.name, surveyName:survey['surveyValue'], choice1:survey['choice1'], choice2:survey['choice2']});
+        io.sockets.emit('new_survey', 
+            {
+                name:socket.name, 
+                surveyName:survey['surveyValue'], 
+                choice1:survey['choice1'], 
+                choice2:survey['choice2']
+            }
+        );
         
     });	
 
     socket.on('count', function(counter, countId)
     {
         var compterId = countId;
-        if (data.compterId == "surveyButton1")
+        if (compterId == "surveyButton1")
         {
-            numVote += counter['addVote'];
-            io.sockets.emit('new_count', {count:numVote, n:counter['n'], compterId:compterId  });
-
+            numVote1 += 1;
+            console.log(numVote1);
+            
+            io.sockets.emit('new_count', {numVote1:numVote1, n:counter['n'], compterId:compterId  });
         }
         else
         {
             numVote2 += counter['addVote'];
-            io.sockets.emit('new_count', {count:numVote2, n:counter['n'], compterId:compterId  });
-
+            io.sockets.emit('new_count', {numVote2:numVote2, n:counter['n'], compterId:compterId  });
         }
         
     });	

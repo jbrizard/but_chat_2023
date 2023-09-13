@@ -40,11 +40,11 @@ function receiveSurvey(data)
 			+ '<span class="user">' + data.name  + '</span> ' 
 			+ '<h2 class="title">' + data.surveyName  + '</h2> ' 
 			+ '<div id="surveyChoice1">'
-				+'<button id="surveyButton1">' + data.choice1 + '</button>' 
+				+'<button class="surveyButtons" id="surveyButton1">' + data.choice1 + '</button>' 
 				+ '<p id="count1" class="count"></p>'
 			+'</div>'
 			+ '<div id="surveyChoice2">'
-				+'<button id="surveyButton2">' + data.choice2 + '</button>' 
+				+'<button class="surveyButtons" id="surveyButton2">' + data.choice2 + '</button>' 
 				+ '<p id="count2" class="count"></p>'
 			+'</div>'
 	     + '</div>'
@@ -65,6 +65,8 @@ function surveyClickCount()
 	var countId = this.id
 	socket.emit('count', counter, countId);
 	console.log(this.id);
+	$('.surveyButtons').prop('disabled', true);
+
 	
 }
 
@@ -75,11 +77,12 @@ function receiveCount(data)
 	console.log(data.id);
 	if (data.compterId == "surveyButton1")
 	{
-		$('#count1').replaceWith('<p>'+data.numVote1+'</p>');
+		console.log(data.numVote1);
+		$('#count1').replaceWith('<p id="count1">'+data.numVote1+'</p>');
 	}
 	else
 	{
-		$('#count2').replaceWith('<p>'+data.numVote2+'</p>');
+		$('#count2').replaceWith('<p id="count2">'+data.numVote2+'</p>');
 	}
 	
 }
