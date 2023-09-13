@@ -6,7 +6,8 @@
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
 module.exports =  {
-	handleDaffy: handleDaffy // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+	handleDaffy: handleDaffy, // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+	handleDaffy2: handleDaffy2 // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
 }
 
 /**
@@ -22,6 +23,23 @@ function handleDaffy(io, message)
 	{
 		// Si oui, envoie la réponse de Daffy...
 		io.sockets.emit('new_message',
+		{
+			name:'Daffy!!',
+			message:'<span class="daffy">Coin Coin !</span>'
+		});
+	}
+}
+
+function handleDaffy2(io, surveyName)
+{
+	// Passe le message en minuscules (recherche insensible à la casse)
+	surveyName = surveyName.toLowerCase();
+	
+	// Est-ce qu'il contient une référence à Daffy ?
+	if (surveyName.includes('daffy'))
+	{
+		// Si oui, envoie la réponse de Daffy...
+		io.sockets.emit('new_survey',
 		{
 			name:'Daffy!!',
 			message:'<span class="daffy">Coin Coin !</span>'

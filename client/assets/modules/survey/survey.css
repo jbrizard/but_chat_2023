@@ -1,0 +1,21 @@
+#surveys{
+    position: absolute;
+    top: 262px;
+    right: 177px;
+    padding: 5px;
+}
+
+.survey{
+    background-color: white;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+
+
+button{
+    padding: 3px;
+}

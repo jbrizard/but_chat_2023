@@ -1,6 +1,7 @@
 ﻿// Connexion au socket
 var socket = io.connect(':8090');
 
+
 // Demande un pseudo et envoie l'info au serveur
 var name = prompt('Quel est votre pseudo ?');
 socket.emit('user_enter', name);
@@ -56,3 +57,6 @@ function receiveMessage(data)
 	)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 }
+
+
+
