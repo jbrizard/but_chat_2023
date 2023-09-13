@@ -15,7 +15,7 @@ function receiveFeedback(data) {
     //Quelqu'un est en train d'écrire mais ce n'est pas l'utilisateur actif
     if (data.status && name != data.name) 
     {
-
+        
         //On verifie si la personne qui écrit est déjà anoncée ou non
         let here = false;
         let writers = document.querySelectorAll('#feedback>p>span');
@@ -29,6 +29,7 @@ function receiveFeedback(data) {
 
         // L'utilisateur n'est pas encore affiché alors on l'affiche
         if (!here) {
+            
             $('#feedback>p').append('<span id="' + data.id + '">' + data.name + ' </span>');
         }  
     }

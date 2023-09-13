@@ -1,4 +1,8 @@
-﻿html, body {
+﻿@import './modules/connected/connected.css';
+@import './modules/feedback/feedback.css';
+@import './modules/daffy/daffy.css';
+
+html, body {
 	height:100%;
 	margin:0;
 	padding:0;
@@ -88,7 +92,7 @@ h1 {
 	font-weight:bold;
 }
 #messages .message .user:after {
-	content:': ';
+	content:' : ';
 }
 
 #help {
@@ -96,6 +100,7 @@ h1 {
         right:10px;
         top:10px;
 }
+
 #help-toggle {
         width:30px;
         height:30px;
@@ -108,6 +113,7 @@ h1 {
         border-radius:50%;
         cursor:pointer;
 }
+
 #help-content {
         display:none;
         position: absolute;

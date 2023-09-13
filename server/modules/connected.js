@@ -6,10 +6,9 @@
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
 module.exports =  {
-  connected: connected // permet d'appeler cette méthode dans server.js -> connected.connected(...)
+  connected: connected, // permet d'appeler cette méthode dans server.js -> connected.connected(...)
+  disconnected: disconnected // permet d'appeler cette méthode dans server.js -> connected.disconnected(...)
 }
-
-
 
 function connected(io,sockets) 
 {
@@ -24,5 +23,5 @@ function connected(io,sockets)
     
   });
 
-  io.sockets.emit('userConnected',userConnected)
+  io.sockets.emit('user_connected',userConnected)
 }

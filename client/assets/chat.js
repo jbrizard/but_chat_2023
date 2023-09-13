@@ -24,6 +24,12 @@ $('#help-toggle').click(function()
         $('#help-content').fadeToggle('fast');
 });
 
+// Action quand on clique sur le bouton Connected
+$('#connected-toggle').click(function()
+{
+        $('#connected-content').fadeToggle('fast');
+});
+
 
 /**
  * Envoi d'un message au serveur

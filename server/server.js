@@ -64,9 +64,7 @@ io.sockets.on('connection', function(socket)
 		{
 			feedback.stopWriting(io, socket.name, socket.id);
 		}
-	})
-
-	
+	})	
 });
 
 
