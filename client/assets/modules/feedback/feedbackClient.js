@@ -18,7 +18,7 @@ function receiveFeedback(data) {
         
         //On verifie si la personne qui écrit est déjà anoncée ou non
         let here = false;
-        let writers = document.querySelectorAll('#feedback>p>span');
+        let writers = document.querySelectorAll('#connected-content li#' + data.id + '>div>p:nth-of-type(2)');
         writers.forEach(writer => 
         {
             if (writer.id == data.id) 
@@ -30,7 +30,7 @@ function receiveFeedback(data) {
         // L'utilisateur n'est pas encore affiché alors on l'affiche
         if (!here) {
             
-            $('#feedback>p').append('<span id="' + data.id + '">' + data.name + ' </span>');
+            $('#connected-content li#' + data.id + '>div').append('<p id="' + data.id + '"><span></span><span></span><span></span> est en train d\'écrire</p>');
         }  
     }
 
@@ -38,7 +38,7 @@ function receiveFeedback(data) {
     if (!data.status)
     {
         // On recherche l'utilisateur pour le supprimer
-        let writers = document.querySelectorAll('#feedback>p>span');
+        let writers = document.querySelectorAll('#connected-content li#' + data.id + '>div>p:nth-of-type(2)');
         writers.forEach(writer => 
         {
         if (writer.id == data.id) 
