@@ -8,6 +8,8 @@ socket.emit('user_enter', name);
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
 
+socket.on("change_theme", changeTheme);
+
 // Action quand on clique sur le bouton "Envoyer"
 $('#send-message').click(sendMessage);
 
@@ -56,3 +58,46 @@ function receiveMessage(data)
 	)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 }
+
+function changeTheme(data)
+{
+	// change le background en rouge
+	$('body').attr('theme', data.theme);
+	$('h1').text(data.titre);
+}
+
+function clicktheme(){
+    $("#diable").click(() => {
+        console.log("demon")
+        socket.emit('change_theme', {theme:"diable", titre: "l'enfer !"});
+      });
+      $("#zeus").click(() => {
+        console.log("zeus")
+        socket.emit('change_theme', {theme:"zeus", titre: "Olympe"});
+      });
+      $("#gotham").click(() => {
+        console.log("batman")
+        socket.emit('change_theme', {theme:"gotham", titre: "gotham"});
+      });
+      $("#desert").click(() => {
+        console.log("desert")
+        socket.emit('change_theme', {theme:"desert", titre: "Sahara"});
+      });
+      $("#foret").click(() => {
+        console.log("tree")
+        socket.emit('change_theme', {theme:"foret", titre: "Planete !"});
+      });
+}
+
+function currentBut(){
+    //$( "button" ).removeClass( "currentButton" )
+    socket.on('change_theme', function(data)
+    {
+        console.log(data)
+		$( "button" ).removeClass( "currentButton" )
+        $( "#"+data.theme ).addClass( "currentButton" )
+    });
+}
+
+currentBut();
+clicktheme();

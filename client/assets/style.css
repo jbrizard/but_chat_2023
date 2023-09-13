@@ -26,6 +26,39 @@ h1 {
 	font-size:0;
 	box-shadow:0px 0px 20px 0 rgba(0, 0, 0, 0.3);
 }
+
+#palette {
+    left: -1vh;
+    top: 27vh;
+    height: 42%;
+    position: absolute;
+    width: 5.1%;
+    max-width: 500px;
+    background: #555;
+    border-radius: 14px;
+    font-size: 0;
+    box-shadow: 0px 0px 20px 0 rgba(0, 0, 0, 0.3);
+    display: flex;
+
+}
+#emo{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#emo>button{
+    margin: 0.8vh;
+    height: 6vh;
+    width: 4vw;
+    border-radius: 6px;
+    background-color: black;
+    color: black;
+}
+
+.currentButton{
+    background-color: red !important ;
+}
+
 #messages {
 	height:calc(100% - 15px - 60px); /* 15px = padding-top, 60px = formulaire en dessous  */
 	padding-top:15px;

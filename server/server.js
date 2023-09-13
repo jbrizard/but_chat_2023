@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+const theme = require('./modules/theme.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -40,12 +41,21 @@ io.sockets.on('connection', function(socket)
 	{
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
-		
+
+		message = theme.handleTheme(io, message)
+
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+
+		
+	});
+
+	socket.on('change_theme', function(data)
+	{
+		io.sockets.emit('change_theme', data);
 	});
 });
 

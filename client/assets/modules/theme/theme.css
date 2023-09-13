@@ -1,0 +1,181 @@
+/* Thème Diable */
+body[theme*="diable"] {
+    background: #B32D2D;
+    transition: all 0.4s;
+}
+
+body[theme*="diable"] #chat{
+	background-color: #a52a2a;    
+    transition: all 0.4s;                                              
+}
+
+body[theme*="diable"] #messages{
+    background-color: #661A1A;    
+    transition: all 0.4s; 
+    color: white;                                              
+}
+
+body[theme*="diable"] h1 {
+    color: #262422;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s;
+}
+
+body[theme*="diable"] #message-input {
+    background-color:#8C2323;
+    border-color: #262422;
+    transition: all 0.4s;
+}
+
+body[theme*="diable"] #send-message {
+    background-color:#262422;
+    border-color: #262422;
+    transition: all 0.4s;
+}
+
+/* Thème Zeus */
+
+body[theme*="zeus"] {
+    background: #7fa4e1;
+    transition: all 0.4s;
+}
+
+body[theme*="zeus"] #chat{
+	background-color: #6F91C7;    
+    transition: all 0.4s;                                              
+}
+
+body[theme*="zeus"] #messages{
+    background-color: #9bbef5;    
+    transition: all 0.4s; 
+    color: white;                                              
+}
+
+body[theme*="zeus"] h1 {
+    color: #ffee6c;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s;
+}
+
+body[theme*="zeus"] #message-input {
+    background-color:#ffee6c;
+    border-color: #262422;
+    transition: all 0.4s;
+}
+
+body[theme*="zeus"] #send-message {
+    background-color:#262422;
+    border-color: #262422;
+    transition: all 0.4s;
+}
+
+/* Thème Gotham */
+
+body[theme*="gotham"] {
+    background: #0f1e36;
+    transition: all 0.4s;
+}
+
+body[theme*="gotham"] #chat{
+	background-color: #132542;    
+    transition: all 0.4s;                                              
+}
+
+body[theme*="gotham"] #messages{
+    background-color: #315082;    
+    transition: all 0.4s; 
+    color: white;                                              
+}
+
+body[theme*="gotham"] h1 {
+    color: #ffee6c;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s;
+}
+
+body[theme*="gotham"] #message-input {
+    background-color:#ffee6c;
+    border-color: #262422;
+    transition: all 0.4s;
+}
+
+body[theme*="gotham"] #send-message {
+    background-color:#315082;
+    border-color: #262422;
+    color: #ffee6c;
+    transition: all 0.4s;
+}
+
+/* Thème Desert */
+
+body[theme*="desert"] {
+    background: #ffb62f;
+    transition: all 0.4s;
+}
+
+body[theme*="desert"] #chat{
+	background-color: #BF8822;    
+    transition: all 0.4s;                                              
+}
+
+body[theme*="desert"] #messages{
+    background-color: #FFB62F;    
+    transition: all 0.4s; 
+    color: white;                                              
+}
+
+body[theme*="desert"] h1 {
+    color: #262422;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s;
+}
+
+body[theme*="desert"] #message-input {
+    background-color:#FFB62F;
+    border-color: #262422;
+    transition: all 0.4s;
+}
+
+body[theme*="desert"] #send-message {
+    background-color:#BF8822;
+    border-color: #262422;
+    color: #262422;
+    transition: all 0.4s;
+}
+
+/* Thème Desert */
+
+body[theme*="foret"] {
+    background: #0d792f;
+    transition: all 0.4s;
+}
+
+body[theme*="foret"] #chat{
+	background-color: #402D0B;    
+    transition: all 0.4s;                                              
+}
+
+body[theme*="foret"] #messages{
+    background-color: #16C44D;    
+    transition: all 0.4s; 
+    color: white;                                              
+}
+
+body[theme*="foret"] h1 {
+    color: #402D0B;
+    text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s;
+}
+
+body[theme*="foret"] #message-input {
+    background-color:#16C44D;
+    border-color: #262422;
+    transition: all 0.4s;
+}
+
+body[theme*="foret"] #send-message {
+    background-color:#0d792f;
+    border-color: #262422;
+    color: #402D0B;
+    transition: all 0.4s;
+}
