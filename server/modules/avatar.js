@@ -25,6 +25,11 @@ function addAvatar(io, socket, avatar, callback)
 		// Nom du fichier
 		const fileName = socket.id + "-" + Date.now() + ext;
 
+		// Créer le chemin s'il n'existe pas
+		var dir = '../client/assets/tmp/upload/';
+		if (!fs.existsSync(dir)){
+			fs.mkdirSync(dir, { recursive: true });
+		}
 		// Enregistre le fichier temporairement
 		fs.writeFile("../client/assets/tmp/upload/" + fileName, avatar.file, (err) => 
 		{
