@@ -52,34 +52,6 @@ io.sockets.on('connection', function(socket)
 		daffy.handleDaffy(io, message);
 	});
 
-	// socket.on('survey', function(survey)
-	// {
-	// 	// Par sécurité, on encode les caractères spéciaux
-	// 	// survey = ent.encode(survey.surveyValue);
-	
-	// 	// Transmet le message à tous les utilisateurs (broadcast)
-	// 	io.sockets.emit('new_survey', {name:socket.name, surveyName:survey['surveyValue'], choice1:survey['choice1'], choice2:survey['choice2']});
-		
-	// });	
-
-	// socket.on('count', function(counter, countId)
-	// {
-	// 	score += counter['count'];
-	// 	var compter = score+counter['addVote'];
-	// 	var compterId = countId;
-	// 	console.log(counter['count'], compter,'f', compterId);
-		
-	// 	// Transmet le message à tous les utilisateurs (broadcast)
-	// 	io.sockets.emit('new_count', {count:compter, n:counter['n'], compterId:compterId  });
-	// });	
-	// socket.on('count2', function(counter)
-	// {
-	// 	var score = 0;
-	// 	counteer = score+counter;
-	// 	// Transmet le message à tous les utilisateurs (broadcast)
-	// 	io.sockets.emit('new_count', {count:counter['count'], n:counter['n']});
-	// });
-
 });
 
 // Lance le serveur sur le port 8090 (http://localhost:8090)
