@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var survey = require('./modules/survey.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -29,6 +30,8 @@ app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 // Gestion des connexions au socket
 io.sockets.on('connection', function(socket)
 {
+	survey.handleNewConnection(socket);
+
 	// Arrivée d'un utilisateur
 	socket.on('user_enter', function(name)
 	{
@@ -49,25 +52,26 @@ io.sockets.on('connection', function(socket)
 		daffy.handleDaffy(io, message);
 	});
 
-	socket.on('survey', function(survey)
-	{
-		// Par sécurité, on encode les caractères spéciaux
-		// survey = ent.encode(survey.surveyValue);
+	// socket.on('survey', function(survey)
+	// {
+	// 	// Par sécurité, on encode les caractères spéciaux
+	// 	// survey = ent.encode(survey.surveyValue);
 	
-		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_survey', {name:socket.name, surveyName:survey['surveyValue'], choice1:survey['choice1'], choice2:survey['choice2']});
+	// 	// Transmet le message à tous les utilisateurs (broadcast)
+	// 	io.sockets.emit('new_survey', {name:socket.name, surveyName:survey['surveyValue'], choice1:survey['choice1'], choice2:survey['choice2']});
 		
-	});	
+	// });	
 
-	socket.on('count', function(counter)
-	{
-		var score = 0;
-		var compter = score+counter['count'];
-		console.log(counter['count'], compter,'f');
+	// socket.on('count', function(counter, countId)
+	// {
+	// 	score += counter['count'];
+	// 	var compter = score+counter['addVote'];
+	// 	var compterId = countId;
+	// 	console.log(counter['count'], compter,'f', compterId);
 		
-		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_count', {count:compter, n:counter['n']});
-	});	
+	// 	// Transmet le message à tous les utilisateurs (broadcast)
+	// 	io.sockets.emit('new_count', {count:compter, n:counter['n'], compterId:compterId  });
+	// });	
 	// socket.on('count2', function(counter)
 	// {
 	// 	var score = 0;

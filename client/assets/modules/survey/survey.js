@@ -38,42 +38,50 @@ function receiveSurvey(data)
 	$('#surveys').append(
 		'<div class="survey">'
 			+ '<span class="user">' + data.name  + '</span> ' 
-			+ '<h2 id="title">' + data.surveyName  + '</h2> ' 
+			+ '<h2 class="title">' + data.surveyName  + '</h2> ' 
 			+ '<div id="surveyChoice1">'
-				+'<button id="button1">' + data.choice1 + '</button>' 
+				+'<button id="surveyButton1">' + data.choice1 + '</button>' 
 				+ '<p id="count1" class="count"></p>'
 			+'</div>'
 			+ '<div id="surveyChoice2">'
-				+'<button id="button2">' + data.choice2 + '</button>' 
+				+'<button id="surveyButton2">' + data.choice2 + '</button>' 
 				+ '<p id="count2" class="count"></p>'
 			+'</div>'
 	     + '</div>'
 	)
-	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+	var button1 = $('#surveyButton1');
+	var button2 = $('#surveyButton2');
+	
+	button1.click(surveyClickCount);
+	button2.click(surveyClickCount);
 }
 
 
-function counter()
+function surveyClickCount()
 {
 	var n;
-	var count = 1;
-	var counter = {count, n}
-	socket.emit('count', counter);
-	console.log('titi');
+	var addVote = 1;
+	var counter = {addVote, n}
+	var countId = this.id
+	socket.emit('count', counter, countId);
+	console.log(this.id);
 	
 }
-var button1 = $('#button1');
-var button2 = $('#button2');
 
-button1.click(counter(), n=1);
-button2.click(counter(), n=2);
-console.log('erovjievo');
+
 
 function receiveCount(data)
 {
-	console.log('ouiouiouiouioui');
+	console.log(data.id);
+	if (data.compterId == "surveyButton1")
+	{
+		$('#count1').replaceWith('<p>'+data.numVote1+'</p>');
+	}
+	else
+	{
+		$('#count2').replaceWith('<p>'+data.numVote2+'</p>');
+	}
 	
-	$('#count1').replaceWith('<p>brbrtbrb</p>');
 }
 	
 
