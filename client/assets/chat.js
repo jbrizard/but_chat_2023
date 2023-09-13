@@ -1,12 +1,16 @@
 ﻿// Connexion au socket
 var socket = io.connect(':8090');
-
 // Demande un pseudo et envoie l'info au serveur
 var name = prompt('Quel est votre pseudo ?');
 socket.emit('user_enter', name);
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
+
+
+const emojis = new Reactions(
+	document.querySelector('.emojisModale')
+);
 
 // Action quand on clique sur le bouton "Envoyer"
 $('#send-message').click(sendMessage);
@@ -15,19 +19,19 @@ $('#send-message').click(sendMessage);
 $('#message-input').keyup(function(evt)
 {
 	if (evt.keyCode == 13) // 13 = touche Entrée
-		sendMessage();
+	sendMessage();
 });
 
 // Action quand on clique sur le bouton Aide (?)
 $('#help-toggle').click(function()
 {
-        $('#help-content').fadeToggle('fast');
+	$('#help-content').fadeToggle('fast');
 });
 
 
 /**
  * Envoi d'un message au serveur
- */
+*/
 function sendMessage()
 {
 	// Récupère le message, puis vide le champ texte
@@ -43,16 +47,21 @@ function sendMessage()
 	socket.emit('message', message);
 }
 
+
 /**
  * Affichage d'un message reçu par le serveur
  */
 function receiveMessage(data)
 {
-	$('#chat #messages').append(
-		'<div class="message">'
-			+ '<span class="user">' + data.name  + '</span> ' 
-			+ data.message 
-	     + '</div>'
-	)
+	$('#chat #messages').append(`
+		<div class="message" data-id="${data.id}">
+			<span class="user">${data.name}</span>
+				${data.message}
+			<button class="addReaction" onclick="emojis.sendReaction(this)"></button>
+			<ul class="reactions"></ul>
+	    </div>
+	`)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+	
+	emojis.setMessagesBtn(document.querySelectorAll('.addReaction'))
 }

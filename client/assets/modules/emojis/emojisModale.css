@@ -1,0 +1,48 @@
+.emojisModale {
+    position: fixed;
+    gap: 2px;
+    border-radius: 100vmax;
+    background-color: red;
+    max-width: 200px;
+    overflow-x: scroll;
+    padding: .1rem 1rem;
+    display: none;
+}
+
+.emojisModale.show {
+    display: flex;
+}
+
+.emojisModale .emoji {
+   font-size: 1rem;
+   aspect-ratio: 1/1;
+}
+
+.addReaction {
+    display: block;
+    width: 20px;
+    height: 3px;
+    background-color: red;
+    cursor: pointer;
+}
+
+.reactions {
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.reaction {
+    position: relative;
+    cursor: help;
+    display: inline;
+}
+.reaction:hover > span:last-child{
+    opacity: 1;
+}
+.reaction > span:last-child {
+    position: absolute;
+    top: 100%;
+    opacity: 0;
+    left: -10px;
+}

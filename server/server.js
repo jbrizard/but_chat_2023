@@ -5,6 +5,8 @@ var ioLib = require('socket.io');	// WebSocket
 var ent = require('ent');		// Librairie pour encoder/décoder du HTML
 var path = require('path');		// Gestion des chemins d'accès aux fichiers	
 var fs = require('fs');			// Accès au système de fichier
+const { v4: uuidv4 } = require('uuid');
+
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
@@ -43,11 +45,23 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message});
+		io.sockets.emit('new_message', {name: socket.name, message:message, id: uuidv4()});
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 	});
+
+	socket.on('getEmojis', function()
+	{
+		const jsonPath = path.join(process.cwd(), 'modules/emojis.json');
+        const data = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+        socket.emit("allEmojis",  data);
+	});
+
+	socket.on('addReactionToMessage', function(data)
+	{
+		io.sockets.emit('reactionAdded', {messageId: data.messageId, user: socket.name, emojiCode: data.emojiCode});
+	})
 });
 
 // Lance le serveur sur le port 8090 (http://localhost:8090)
