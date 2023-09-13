@@ -6,12 +6,12 @@ socket.on('file_share', receiveFile);
 
 // (click button or press "Enter") like messages to send file (so you can send both files and image simultaneously)
 $('#send-message').click(() => {
-	sendFile(); // ! made by justin (possible d'envoyer un message ET un fichier en même temps)
+	sendFile(); // (possible d'envoyer un message ET un fichier en même temps)
 });
 
 $('#message-input').keyup(function(evt)
 {
-	if (evt.keyCode == 13) sendFile(); // ! made by justin (possible d'envoyer un message ET un fichier en même temps)
+	if (evt.keyCode == 13) sendFile(); // (possible d'envoyer un message ET un fichier en même temps)
 });
 
 
@@ -21,23 +21,19 @@ $('#message-input').keyup(function(evt)
  */
 function sendFile()
 {
-	let blob, format, name;
+	let blob;
 	const fileInput = document.getElementById("file-input");
 
     if(fileInput.files.length == 0){
         return;
 	}
 
-	name = fileInput.files[0].name;
 	blob = new Blob([fileInput.files[0]],{type: "octet-stream"});
-	format = fileInput.files[0].type;
-
-	console.log(format);
-	console.log(blob);
-	document.getElementById("file-input").value = null;
 
 	// Envoi le message au serveur pour broadcast
-	socket.emit('send_file', {name, blob, format});
+	socket.emit('send_file', {name: fileInput.files[0].name, blob: blob});
+	document.getElementById("file-input").value = null;
+
 }
 
 
@@ -50,12 +46,7 @@ function receiveFile(data){
 	)
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 }
-// TODO check how to fix 1MB max file size by socket.io
-// result : put in server
-// var io = ioLib(server, { //TODO delete maxHttpBufferSize
-// 	maxHttpBufferSize: 10 * 1024 * 1024, // 10MB in bytes
-//   });
-// TODO check why .zip format is not detected in files.type (check: https://stackoverflow.com/questions/26149389/mime-type-missing-for-rar-and-tar)
+
 function mediaDisplay(data){
 
 	switch (data.format) {
@@ -75,7 +66,8 @@ function mediaDisplay(data){
 			);
 			break;
 		// compressed
-		case "application/x-zip-compressed":
+		case "application/zip":
+		case "application/vnd.rar":
 			return (
 				'<a href="/../uploads/' + data.fileName + '">' + data.fileName + '</a>'
 			);

@@ -16,7 +16,9 @@ var app = express();
 var server = http.createServer(app);
 
 // Initialisation du websocket
-var io = ioLib(server);
+var io = ioLib(server, {
+		maxHttpBufferSize: 10 * 1024 * 1024, //10MB
+});
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)

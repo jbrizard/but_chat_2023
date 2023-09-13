@@ -11,6 +11,9 @@ module.exports =  {
 
 // import de "File system"
 const fs = require('fs');
+// MIME recognition
+var mime = require('mime-types');
+
 
 const { v4: uuidv4 } = require('uuid');
 
@@ -21,7 +24,9 @@ function handleFile(io, props, socket)
 {
 	let blob, format, fileId;
 	blob = props.blob;
-	format = props.format;
+	format = mime.lookup(props.name);
+
+	console.log(format);
 
 	fileId = uuidv4();
 	
@@ -33,7 +38,7 @@ function handleFile(io, props, socket)
 	});
 
 
-	io.sockets.emit('file_share', {name: socket.name, fileName: fileId+props.name, format: props.format});
+	io.sockets.emit('file_share', {name: socket.name, fileName: fileId+props.name, format: format});
 
 
 }
