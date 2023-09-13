@@ -8,6 +8,7 @@
         <script src="/socket.io/socket.io.js"></script> <!-- fichier injecté par NodeJS -->
         
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="/modules/avatar/avatar.css" />
     </head>
     
     <body>
@@ -32,6 +33,18 @@
 					</li>
 				</ul>
 		</div>
+
+        <div class="avatar-upload">
+            <div class="avatar-edit">
+                <input onchange="upload(this.files)" type="file" id="add-avatar" accept=".png, .jpg, .jpeg .gif" />
+                <label for="add-avatar"></label>
+            </div>
+            <div class="avatar-preview">
+                <div id="imagePreview">
+                </div>
+            </div>
+        </div>
+		
         <div id="connected">
             <div id="connected-toggle">
                 <svg fill="#fff" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
@@ -44,5 +57,6 @@
         <script type="text/javascript" src="/chat.js"></script>
         <script type="text/javascript" src="/modules/feedback/feedbackClient.js"></script>
         <script type="text/javascript" src="/modules/connected/connectedClient.js"></script>
+        <script type="text/javascript" src="/modules/avatar/avatar.js"></script>
     </body>
 </html>

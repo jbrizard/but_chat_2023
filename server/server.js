@@ -10,6 +10,7 @@ var fs = require('fs');			// Accès au système de fichier
 var daffy = require('./modules/daffy.js');
 var feedback  = require('./modules/feedback.js');
 var connected  = require('./modules/connected.js');
+var avatar = require('./modules/avatar.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -52,7 +53,7 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message});
+		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar });
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
@@ -68,7 +69,13 @@ io.sockets.on('connection', function(socket)
 		{
 			feedback.stopWriting(io, socket.name, socket.id);
 		}
-	})	
+	});
+
+	// Utilisation du module avatar pour uploader une image
+	socket.on("upload", (image, callback) => 
+	{
+		avatar.addAvatar(io, socket, image, callback);
+	});
 });
 
 
