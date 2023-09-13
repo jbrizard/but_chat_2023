@@ -27,6 +27,9 @@ app.get('/', function(req, res)
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 
+// Historique des messages
+const messageHistory = [];
+
 // Gestion des connexions au socket
 io.sockets.on('connection', function(socket)
 {
@@ -36,12 +39,17 @@ io.sockets.on('connection', function(socket)
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
 	});
+	// Envoyer l'historique des messages au nouveau client qui se connecte
+	socket.emit('messageHistory', messageHistory);
 	
 	// Réception d'un message
 	socket.on('message', function(message)
 	{
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
+
+		// Ajoute le message à la liste des messages
+		messageHistory.push({name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar });
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar });
