@@ -40,6 +40,10 @@ io.sockets.on('connection', function(socket)
 		connected.connected(io,io.sockets.sockets);
 	});
 
+	socket.on('disconnect', function() {
+		io.sockets.emit('disconnected', socket.id);
+	});
+
 	
 	// Réception d'un message
 	socket.on('message', function(message)

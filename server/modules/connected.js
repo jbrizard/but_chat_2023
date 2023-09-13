@@ -14,7 +14,6 @@ function connected(io,sockets)
   let userConnected = [];
 
   sockets.forEach(socket => {
-
     userConnected.push({
       name: socket.name,
       id: socket.id
