@@ -20,7 +20,7 @@ const { v4: uuidv4 } = require('uuid');
 /**
  * Lorsqu'on appelle Daffy, il répond...
  */
-function handleFile(io, props, socket)
+function handleFile(io, username, props)
 {
 	let blob, format, fileId;
 	blob = props.blob;
@@ -36,7 +36,7 @@ function handleFile(io, props, socket)
 	});
 
 
-	io.sockets.emit('file_share', {name: socket.name, fileName: fileId+props.name, format: format});
+	io.sockets.emit('file_share', {name: username, fileName: fileId+props.name, format: format});
 
 
 }

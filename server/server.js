@@ -54,7 +54,7 @@ io.sockets.on('connection', function(socket)
 
 	socket.on('send_file', function(props)
 	{
-		fileSharing.handleFile(io, props, socket);
+		fileSharing.handleFile(io, socket.name, props);
 	});
 });
 
