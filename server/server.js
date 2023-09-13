@@ -43,6 +43,8 @@ io.sockets.on('connection', function(socket)
 		socket.emit('messageHistory', messageHistory)
 		// Message de connection dans le chat
 		io.sockets.emit('welcome', name);
+		// Connaitre mon id
+		socket.emit('myId', socket.id);
 		// Ajouter le message de connection dans l'historique
 		messageHistory.push({name:socket.name, message:null, socketId: socket.id, avatar: socket.avatar });
 	});
