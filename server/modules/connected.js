@@ -18,7 +18,8 @@ function connected(io,sockets)
   sockets.forEach(socket => {
     userConnected.push({
       name: socket.name,
-      id: socket.id
+      id: socket.id,
+      avatar: socket.avatar
     });
     
   });
