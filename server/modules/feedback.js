@@ -14,6 +14,8 @@ module.exports =  {
 /**
  * Lorsqu'on appelle Feedback ...
  */
+
+// Fonction qui anime l'utilisateur qui est en train d'écrire
 function writing(io, user, id)
 {
     io.sockets.emit('feedback',
@@ -24,6 +26,7 @@ function writing(io, user, id)
     });
 }
 
+// Fonction qui stop l'animation de l'utilisateur en train d'écrire après un envoie ou une annulation de message
 function stopWriting(io, user, id)
 {
     io.sockets.emit('feedback',
