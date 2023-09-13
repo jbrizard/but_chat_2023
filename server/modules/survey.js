@@ -37,17 +37,17 @@ function handleNewConnection(socket, io)
     {
         var compterId = countId;
         if (compterId == "surveyButton1")
-        {
             numVote1 += 1;
-            console.log(numVote1);
-            
-            io.sockets.emit('new_count', {numVote1:numVote1, n:counter['n'], compterId:compterId  });
-        }
         else
-        {
-            numVote2 += counter['addVote'];
-            io.sockets.emit('new_count', {numVote2:numVote2, n:counter['n'], compterId:compterId  });
-        }
+            numVote2 += 1;
+        
+        io.sockets.emit('new_count', {
+            numVote1:numVote1, 
+            numVote2:numVote2, 
+            n:counter['n'],
+            compterId:compterId  
+        });
+
         
     });	
 }
