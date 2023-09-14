@@ -35,7 +35,7 @@ function formSurvey()
 {
 	$('#tools').append(
 		'<div id="createSurvey">'
-			+'<input type="text" id="survey-input" maxlength="20" placeholder="Intitulé du sondage"/>'
+			+'<input type="text" id="survey-input" maxlength="28" placeholder="Intitulé du sondage"/>'
 			+'<input type="text" id="choice1" maxlength="20"placeholder="Réponse 1"/>'
 			+'<input type="text" id="choice2" maxlength="20" placeholder="Réponse 2"/>'
 			+'<input type="button" id="input-create-survey" value="Créer un sondage" />'
@@ -157,7 +157,7 @@ function receiveWinner(data)
 	{
 		$('#chat #messages').append(
 			'<div class="message">'
-				+ '<span class="winner">Résultat</span> ' 
+				+ '<span class="winner">Résultat :</span> ' 
 				+ data.choice1
 			 + '</div>'
 		)
@@ -167,7 +167,7 @@ function receiveWinner(data)
 	{
 		$('#chat #messages').append(
 			'<div class="message">'
-				+ '<span class="winner">Résultat</span> ' 
+				+ '<span class="winner">Résultat :</span> ' 
 				+ data.choice2
 			 + '</div>'
 		)
@@ -177,8 +177,8 @@ function receiveWinner(data)
 	{
 		$('#chat #messages').append(
 			'<div class="message">'
-				+ '<span class="winner">Résultat</span> ' 
-				+ data.choice2 + 'et' + data.choice2
+				+ '<span class="winner">Résultat :</span> ' 
+				+ data.choice1 + ' et ' + data.choice2
 			 + '</div>'
 		)
 		.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
