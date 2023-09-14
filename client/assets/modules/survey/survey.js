@@ -158,7 +158,7 @@ function receiveWinner(data)
 		$('#chat #messages').append(
 			'<div class="message">'
 				+ '<span class="winner">Résultat :</span> ' 
-				+ data.choice1
+				+ data.choice2
 			 + '</div>'
 		)
 		.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
@@ -168,7 +168,7 @@ function receiveWinner(data)
 		$('#chat #messages').append(
 			'<div class="message">'
 				+ '<span class="winner">Résultat :</span> ' 
-				+ data.choice2
+				+ data.choice1
 			 + '</div>'
 		)
 		.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
