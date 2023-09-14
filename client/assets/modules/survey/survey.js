@@ -102,7 +102,7 @@ function receiveSurvey(data)
 	button1.click(surveyClickCount);
 	button2.click(surveyClickCount);
 
-	$('#createSurvey').css('display','none');
+	$('#createSurvey').replaceWith('');
 	$('#button-survey').prop('disabled', true);	
 
 }
@@ -151,7 +151,7 @@ function voteBar(numVote1, numVote2)
  */
 function receiveWinner(data)
 {
-	$('.surveyButtons').prop('disabled', false);	
+	$('#button-survey').prop('disabled', false);	
 	$('.survey').replaceWith('');
 	if (data.winner < 0)
 	{
