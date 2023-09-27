@@ -14,7 +14,7 @@ module.exports =  {
 /**
  * On transmet une image (file) qui est ajoutée temporairement au serveur
  */
-function addAvatar(io, socket, avatar, callback)
+function addAvatar(io, socket, avatar, callback, history)
 {
 	const previousAvatar = socket.avatar;
 	if (avatar.name)
@@ -45,6 +45,13 @@ function addAvatar(io, socket, avatar, callback)
 	{
 		socket.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU";
 	}
+	history.map((item) => 
+	{
+		if( item.socketId == socket.id && item.avatar != socket.avatar)
+		{
+			item.avatar = socket.avatar;
+		}
+	})
 	// Suppression de l'ancienne image
 	if (previousAvatar != socket.avatar && previousAvatar != undefined && previousAvatar !== "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU") 
 	{

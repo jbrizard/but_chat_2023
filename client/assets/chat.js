@@ -58,13 +58,16 @@ function sendMessage()
 function receiveMessage(data)
 {
 	$('#chat #messages').append(
-		'<div class="message">'
+		'<div id="' + data.idMessage + '" class="message message-' + data.socketId + '">'
 			+ `<img class='avatar ${data.socketId}' src="${ data.avatar ? data.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU" }"  />`
 			+ '<div class="message-container">'
+			+ '<div class="headerMessage">'
 			+ '<span class="user">' + data.name  + '</span> ' 
+			+ '<span class="messageDate">' + data.date  + '</span> '
+			+ '</div>'
 			+ '<span class="message-content">' + data.message + '</span>'
 			+ '</div>'
 	     + '</div>'
 	)
-	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneu
 }
