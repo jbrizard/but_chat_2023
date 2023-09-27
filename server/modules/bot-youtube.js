@@ -21,20 +21,18 @@ youTube.setKey('AIzaSyCvhVH3bWqHvUE2MILcejO2NRY-7NcHigg');
 /**
  * Le bot renvoie une vidéo youtube basé sur ce que l'utilisateur rentre
  */
-function handleYoutube(io, youtubeSearch) 
+function handleYoutube(io, youtubeSearch, token) 
 {
-   
-  youTube.search(youtubeSearch, 2, function(error, result) {
-    // Emit a message with the YouTube video data
-    result.items.forEach(video => {
+    youTube.search(youtubeSearch, 2, function(error, result) {
+      // Emit a message with the YouTube video data
+      result.items.forEach(video => {
         io.sockets.emit('new_youtubeSearch', {
             youtubeThumbnail: `<img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.thumbnails.default.url}" class="youtube-thumbnail">`,
             youtubeTitle: `<span>${video.snippet.title}</span>`,
-            youtubeId: video.id.videoId 
+            youtubeId: video.id.videoId,
+            youtubeNextPageToken: result.nextPageToken,
+            youtubePrevPageToken: result.previousPageToken
         });
+      });
     });
-});
-
-}
-
-//</span><br><iframe fs="0" controls="0" color="blue" class="bot-youtube" src="https://www.youtube.com/embed/${result.items[0].id.videoId}?modestbranding=0&autostart=1&controls=0&showinfo=0"> </iframe>
+};

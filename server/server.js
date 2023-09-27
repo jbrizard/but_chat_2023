@@ -51,15 +51,16 @@ io.sockets.on('connection', function(socket)
 		daffy.handleDaffy(io, message);
 	});
 
-	// Réception d'une rehcerche youtube
-	socket.on('youtubeSearch', function(youtubeSearch)
-	{
+	// Réception d'une recherche youtube
+	socket.on('youtubeSearch', function(youtubeSearch, token) {
 		// Par sécurité, on encode les caractères spéciaux
 		youtubeSearch = ent.encode(youtubeSearch);
-		
+		console.log('text2')
 		// Transmet le message au bot Youtube (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
-		youtubeBot.handleYoutube(io, youtubeSearch);
+		youtubeBot.handleYoutube(io, youtubeSearch, token);
 	});
+
+	//Reception de l'envoie de vidéo sur le chat
 	socket.on('sendVideo', function(videoid)
 	{
 		io.sockets.emit('new_message', {name:socket.name, message:`<iframe class="bot-youtube" src="https://www.youtube.com/embed/${videoid}?modestbranding=0&autostart=1&controls=1&showinfo=0"></iframe>`});
