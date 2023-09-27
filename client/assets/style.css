@@ -1,6 +1,7 @@
 ﻿@import './modules/connected/connected.css';
 @import './modules/feedback/feedback.css';
 @import './modules/daffy/daffy.css';
+@import './modules/identification/identification.css';
 
 html, body {
 	height:100%;

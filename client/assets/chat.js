@@ -59,7 +59,7 @@ function receiveMessage(data)
 {
 	$('#chat #messages').append(
 		'<div class="message">'
-			+ `<img class='avatar ${data.socketId}' src="${ data.avatar ? data.avatar : "./modules/avatar/defaultAvatar.png" }"  />`
+			+ `<img class='avatar ${data.socketId}' src="${ data.avatar ? data.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU" }"  />`
 			+ '<div class="message-container">'
 			+ '<span class="user">' + data.name  + '</span> ' 
 			+ '<span class="message-content">' + data.message + '</span>'

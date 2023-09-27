@@ -1,5 +1,5 @@
 // Image par default pour l'avatar en haut à droite
-$("#imagePreview").css("background-image", "url(./modules/avatar/defaultAvatar.png)");
+$("#imagePreview").css("background-image", "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU)");
 
 /**
  * Mettre à jour tout les avatars de tous ces messages de l'utilisateur qui vient de changer son avatar
