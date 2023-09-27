@@ -58,7 +58,9 @@ io.sockets.on('connection', function(socket)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
-		daffy.handleDaffy(io, message);
+		daffy.onMessage(io, message);
+
+		//Transmet le message au module bot-blague
 		blague.handleBlague(io, message);
 	
 		// Transmet le message au module Basket
