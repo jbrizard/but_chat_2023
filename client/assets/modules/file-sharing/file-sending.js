@@ -1,12 +1,12 @@
-// empty file input to avoid non intentionnal sending of files
+// Vide l'input (au début) file pour évité l'envoi non intentionnel de fichier
 document.getElementById("file-input").value = null;
 
-// listen for file sharings
+// Ecoute de file sharings
 socket.on('file_share', receiveFile);
 
-// (click button or press "Enter") like messages to send file (so you can send both files and image simultaneously)
+// (Click du bouton ou "Enter") pour envoyer des fichier (on peut donc envoyer des fichier et messages en même temps)
 $('#send-message').click(() => {
-	sendFile(); // (possible d'envoyer un message ET un fichier en même temps)
+	sendFile();
 });
 
 $('#message-input').keyup(function(evt)
@@ -21,23 +21,28 @@ $('#message-input').keyup(function(evt)
  */
 function sendFile()
 {
+	// creation de la variable vide blob
 	let blob;
 	const fileInput = document.getElementById("file-input");
-
+	// vérification si un fichier a été donné (et arret si pas de fichier)
     if(fileInput.files.length == 0){
         return;
 	}
-
+	// récuperation du fichier et conversion en blob
 	blob = new Blob([fileInput.files[0]],{type: "octet-stream"});
 
 	// Envoi le message au serveur pour broadcast
 	socket.emit('send_file', {name: fileInput.files[0].name, blob: blob});
+	// Vide l'input pour éviter les envoi de fichier en doublons
 	document.getElementById("file-input").value = null;
 
 }
 
-
-function receiveFile(data){
+/**
+ * Fonction qui display no medias (fait appel à une autre fonction qui fait la gestion des formats)
+ */
+function receiveFile(data)
+{
 	$('#chat #messages').append(
 		'<div class="message">'
 			+ '<span class="user">' + data.name  + '</span> ' 
@@ -47,9 +52,14 @@ function receiveFile(data){
 	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 }
 
-function mediaDisplay(data){
-
-	switch (data.format) {
+/**
+ * Gestion des formats (different lecteur en fonction du format)
+ */
+function mediaDisplay(data)
+{
+	switch (data.format)
+	{
+		// pour les images
 		case "image/jpeg":
 		case "image/gif":
 		case "image/png":
@@ -59,26 +69,26 @@ function mediaDisplay(data){
 				+ '</a>'
 			);
 			break;
-		// video
+		// pour les video
 		case "video/mp4":
 			return (
 				'<video controls autoplay src="/../uploads/' + data.fileName + '">'
 			);
 			break;
-		// compressed
+		// pour les fichier compressé
 		case "application/zip":
 		case "application/vnd.rar":
 			return (
 				'<a href="/../uploads/' + data.fileName + '">' + data.fileName + '</a>'
 			);
 			break;
-		// audio
+		// pour l'audio
 		case "audio/mpeg":
 			return (
 				'<audio controls autoplay src="/../uploads/' + data.fileName + '"></audio>'
 			);
 			break;
-		// pdf application/pdf
+		// pdf
 		case "application/pdf":
 			return (
 				'<object type="application/pdf" data=/../uploads/' + data.fileName + '></object>'
@@ -87,9 +97,4 @@ function mediaDisplay(data){
 		default:
 			break;
 	}
-
-
-
-
-
 }
