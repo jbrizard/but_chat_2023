@@ -16,8 +16,6 @@ function handleNewConnection(socket, io)
 
     socket.on('message', function(data)
         {
-            console.log(data, 'rttt');
-            
             switch (true) {
                 case data === "lolo et clecle <3" && pointCheck[0] === false:
                     pointCheck[0] = true;
@@ -47,12 +45,10 @@ function handleNewConnection(socket, io)
             console.log(typeof(data));
             if (data.includes("[b]"))
             {
-                // Réduisez le score de 5
                 score -= 5;
             }
             if (data.includes("[cr-b]"))
             {
-                // Réduisez le score de 5
                 score -= 5;
             }
 
