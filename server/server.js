@@ -11,6 +11,7 @@ var daffy = require('./modules/daffy.js');
 var feedback  = require('./modules/feedback.js');
 var connected  = require('./modules/connected.js');
 var avatar = require('./modules/avatar.js');
+var identification = require('./modules/identification.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -58,6 +59,9 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
+
+		// Identifie la personne rechercher
+		identification.ping(io, socket.name, socket.id, message);
 	});
 
 	// Un utilisateur est en train d'écrire
@@ -71,6 +75,10 @@ io.sockets.on('connection', function(socket)
 			feedback.stopWriting(io, socket.name, socket.id);
 		}
 	});
+
+	// Un utilisateur à identifier un autre utilisateur
+
+	
 
 	// Utilisation du module avatar pour uploader une image
 	socket.on("upload", (image, callback) => 
