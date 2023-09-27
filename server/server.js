@@ -9,13 +9,19 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var blague = require('./modules/bot-blague.js');
+var fileSharing = require('./modules/file-sharing.js');
+var basket = require('./modules/basket.js');
+var gifAPI = require('./modules/gif-api.js');
+
 // Initialisation du serveur HTTP
 var app = express();
 
 var server = http.createServer(app);
 
 // Initialisation du websocket
-var io = ioLib(server);
+var io = ioLib(server, {
+		maxHttpBufferSize: 10 * 1024 * 1024, //10MB
+});
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
@@ -26,9 +32,15 @@ app.get('/', function(req, res)
 // Traitement des fichiers "statiques" situés dans le dossier <assets> qui contient css, js, images...
 app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 
+// Initialisation du module Basket
+basket.init(io);
+
 // Gestion des connexions au socket
 io.sockets.on('connection', function(socket)
 {
+	// Ajoute le client au jeu de basket
+	basket.addClient(socket);
+
 	// Arrivée d'un utilisateur
 	socket.on('user_enter', function(name)
 	{
@@ -48,6 +60,24 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 		blague.handleBlague(io, message);
+	
+		// Transmet le message au module Basket
+		basket.onMessage(io, message);
+	});
+
+	socket.on('search_gif', function(search_term)
+	{
+		gifAPI.handleSearch(io, socket, search_term);
+	});
+
+	socket.on('send_gif', function(data)
+	{
+		gifAPI.handleGif(io, {name: socket.name, data: data});
+	});
+	
+  	socket.on('send_file', function(props)
+	{
+		fileSharing.handleFile(io, socket.name, props);
 	});
 });
 
