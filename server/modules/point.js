@@ -22,7 +22,6 @@ function handleNewConnection(socket, io)
                 case data === "lolo et clecle <3" && pointCheck[0] === false:
                     pointCheck[0] = true;
                     score +=20
-                    socket.emit('point_view', score)
                     break;
                 case data === "merci" && pointCheck[1] === false:
                     pointCheck[1] = true;
