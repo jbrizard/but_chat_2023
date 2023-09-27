@@ -8,6 +8,10 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var feedback  = require('./modules/feedback.js');
+var connected  = require('./modules/connected.js');
+var avatar = require('./modules/avatar.js');
+var identification = require('./modules/identification.js');
 var blague = require('./modules/bot-blague.js');
 var fileSharing = require('./modules/file-sharing.js');
 var basket = require('./modules/basket.js');
@@ -46,8 +50,16 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
+		socket.avatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU';
+
+		connected.connected(io,io.sockets.sockets);
 	});
-	
+
+	socket.on('disconnect', function() {
+		io.sockets.emit('disconnected', socket.id);
+	});
+
+	----------------------------------------------------
 	// Réception d'un message
 	socket.on('message', function(message)
 	{
@@ -55,16 +67,41 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message});
+		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar });
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
-		daffy.onMessage(io, message);
+    daffy.onMessage(io, message);
 
-		//Transmet le message au module bot-blague
+		// Identifie la personne rechercher
+		identification.ping(io, socket.name, socket.id, message);
+    
+    //Transmet le message au module bot-blague
 		blague.handleBlague(io, message);
 	
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
+	});
+
+	// Un utilisateur est en train d'écrire
+	socket.on('writing', function(writing)
+	{
+		if (writing) {
+			feedback.writing(io, socket.name, socket.id);
+		}
+		else
+		{
+			feedback.stopWriting(io, socket.name, socket.id);
+		}
+	});
+
+	// Un utilisateur à identifier un autre utilisateur
+
+	
+
+	// Utilisation du module avatar pour uploader une image
+	socket.on("upload", (image, callback) => 
+	{
+		avatar.addAvatar(io, socket, image, callback);
 	});
 
 	socket.on('search_gif', function(search_term)
@@ -82,6 +119,7 @@ io.sockets.on('connection', function(socket)
 		fileSharing.handleFile(io, socket.name, props);
 	});
 });
+
 
 // Lance le serveur sur le port 8090 (http://localhost:8090)
 server.listen(8090);
