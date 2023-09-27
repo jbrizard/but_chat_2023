@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var blague = require('./modules/bot-blague.js');
 var fileSharing = require('./modules/file-sharing.js');
 var basket = require('./modules/basket.js');
 var gifAPI = require('./modules/gif-api.js');
@@ -57,8 +58,9 @@ io.sockets.on('connection', function(socket)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
-		daffy.onMessage(io, message);
-		
+		daffy.handleDaffy(io, message);
+		blague.handleBlague(io, message);
+	
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
 	});
