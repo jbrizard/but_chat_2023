@@ -7,8 +7,16 @@ button.addEventListener("click",() => {
   searchGif(input.value);
 })
 
+let panelOn = false;
 document.querySelector('#send-gif').addEventListener("click", () => {
-  gifPanel.style.display = "grid";
+
+  if(!panelOn){
+    gifPanel.style.display = "grid";
+    panelOn = !panelOn;
+  }else{
+    gifPanel.style.display = "none";
+    panelOn = !panelOn;
+  }
 })
 
 // Ecoute du retour de recherche et du reçu d'un gif
