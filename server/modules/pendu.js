@@ -1,7 +1,7 @@
 /*
  * Nom : Pendu !
  * Description : Ce module déclenche le pendu
- * Auteur(s) : Samuel Juanola
+ * Auteur(s) : Samuel Juanola Dorian Engelvin
  */
 
 const { response } = require("express");
@@ -41,7 +41,7 @@ function handlePendu(io, word)
 
 
     {
-       
+       //Masque le mot avec des _ séparés d'un espace
        for (let index = 0; index < mysteryWord.length; index++) {
         hiddenWord += '_ ';
        }
@@ -63,13 +63,13 @@ function handleReponse(io, reponse)
         console.log(reponse, 'type :', typeof reponse, 'longueur', reponse.length);
         if (reponse.length>1 || reponse.length==0)
         {
-            sendBotMessage(io,'Il faut écrire une seule lettre');
+            sendBotMessage(io,'Il faut écrire une seule lettre');   //On verifie si le message contient bien une seule lettre
         }
         else
         {
             if(allLetters.includes(reponse))
             {
-                sendBotMessage(io,'Vous avez déjà essayé cette lettre')
+                sendBotMessage(io,'Vous avez déjà essayé cette lettre') //Ensuite on verfiei que la lettre n'a pas déjà été proposée
             }
             else
             {
@@ -77,6 +77,7 @@ function handleReponse(io, reponse)
                 allLetters.push(reponse);    
                 console.log(mysteryWord);
         
+                //On regarde si la lettre est présente dans le mot
                 if (mysteryWord.includes(reponse))
                 {
                     foundLetters.push(reponse);
@@ -86,7 +87,7 @@ function handleReponse(io, reponse)
                     nbVie++;
                     sendBotDisplay(io);
                 }
-    
+                //On met a jour le mot mystereavec les lettres trouvées
                 hiddenWord= updateHiddenWord();
                 sendBotMessage(io,hiddenWord);
                 checkIfWinnerOrLoser(io); 
@@ -99,7 +100,9 @@ function handleReponse(io, reponse)
    
 }
 
-
+/**
+ * Fonction qui réecrit le mot mystere avec les reponses correctement placées
+ */
 function updateHiddenWord() {
     let hiddenWord = "";
     for (let i = 0; i < mysteryWord.length; i++) {
@@ -115,6 +118,9 @@ function updateHiddenWord() {
     return hiddenWord;
   }
 
+/**
+ * On regarde si il y'a un gagnant en regardant si mystery word conteint encore des underscore
+ */
 function checkIfWinnerOrLoser(io)
 {
     if(hiddenWord.indexOf('_')==-1)
@@ -131,6 +137,9 @@ function checkIfWinnerOrLoser(io)
     }
 }
 
+/**
+ * Gère l'affichage du dessin du pendu en fonction du nombre de vie qui est incrémenté lors d'une mauvaise réponse
+ */
 function sendBotDisplay(io)
 {
     let html = ``
@@ -151,6 +160,10 @@ function sendBotDisplay(io)
     });
 }
 
+/**
+ * @reponse message à mettre en paramètre que le bot répètra
+ * Fait dire un message de la part du bot pendu 
+ */
 function sendBotMessage(io, reponse)
 {
    
