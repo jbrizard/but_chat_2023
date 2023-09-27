@@ -33,13 +33,14 @@ function sendMessage()
 {
 	// Récupère le message, puis vide le champ texte
 	var input = $('#message-input');
-	var message = input.val();	
+	var message = input.val();
 	input.val('');
 	
 	// On n'envoie pas un message vide
 	if (message == '')
 		return;
 	
+	message = hilightMessage(message);
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
 }

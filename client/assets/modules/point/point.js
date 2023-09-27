@@ -99,3 +99,11 @@ function pointView(data) {
     // Assurez-vous que l'élément #input-create-survey existe dans votre HTML
     $('#input-create-survey').click(sendSurvey);
 }
+
+
+function hilightMessage(message)
+{  
+    if ($('#message-hilight').is(':checked'))
+        message = '[b]'+message+'[]';
+    return message;
+}

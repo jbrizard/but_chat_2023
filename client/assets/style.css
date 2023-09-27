@@ -142,3 +142,15 @@ h1{
         box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
         border-radius: 3px;
 }
+
+#utilPoint{
+	position: absolute;
+	padding: 10px;
+	top: 650px;
+	right: 200px;
+	background-color: white;
+	display: flex;
+	flex-direction: row;
+	border-radius: 8px;
+
+}

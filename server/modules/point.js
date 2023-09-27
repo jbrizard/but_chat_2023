@@ -8,6 +8,7 @@
 
 module.exports =  {
 	handleNewConnection: handleNewConnection, // permet d'appeler cette méthode dans server.js
+    replaceTag: replaceTag,
 }
 
 
@@ -33,4 +34,11 @@ function handleNewConnection(socket, io)
 
             
         });	
+}
+
+function replaceTag(message){
+    message = message.replace("[b]", "<span class='bold'>");
+    message = message.replace("[cr]", "<span class='color-red'>");
+    message = message.replace("[]", "</span>");
+    return message
 }

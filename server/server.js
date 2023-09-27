@@ -9,6 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var survey = require('./modules/survey.js');
+var point = require('./modules/point.js')
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -31,6 +32,8 @@ app.use(express.static(path.resolve(__dirname + '/../client/assets')));
 io.sockets.on('connection', function(socket)
 {
 	survey.handleNewConnection(socket, io);
+	point.handleNewConnection(socket, io);
+
 
 	// Arrivée d'un utilisateur
 	socket.on('user_enter', function(name)
@@ -44,7 +47,8 @@ io.sockets.on('connection', function(socket)
 	{
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
-		
+		//module
+		message = point.replaceTag(message);
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
 		
