@@ -1,6 +1,6 @@
 /*
  * Nom : Point !
- * Description : Ce module fait des sondages incroyables !
+ * Description : Ce module distributs des points !
  * Auteur(s) : Lolo et clecle
  */
 
@@ -14,7 +14,7 @@ function handleNewConnection(socket, io)
     var score = 0;
     var pointCheck = [false, false, false, false, false];
 
-    socket.on('point', function(data)
+    socket.on('message', function(data)
         {
             console.log(data, 'rttt');
             
@@ -22,7 +22,6 @@ function handleNewConnection(socket, io)
                 case data === "lolo et clecle <3" && pointCheck[0] === false:
                     pointCheck[0] = true;
                     score +=20
-                    socket.emit('point_view', score)
                     break;
                 case data === "merci" && pointCheck[1] === false:
                     pointCheck[1] = true;
@@ -41,19 +40,24 @@ function handleNewConnection(socket, io)
                     score +=15
                     break;
                 default:
+                    data;
                     break;
             }
-            console.log(score);
-            if (data.includes("[b]")) {
+            console.log(data);
+            console.log(typeof(data));
+            if (data.includes("[b]"))
+            {
                 // Réduisez le score de 5
                 score -= 5;
             }
-            if (data.includes("[cr-b]")) {
+            if (data.includes("[cr-b]"))
+            {
                 // Réduisez le score de 5
                 score -= 5;
             }
 
-            if(score > 0){
+            if(score > 0)
+            {
                 console.log(score, 'man');
                 socket.emit('disable_checkbox',true);
             }else

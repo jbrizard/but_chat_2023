@@ -119,7 +119,6 @@ function surveyClickCount()
 	var pointCheck = true
 	socket.emit('count', counter, countId);
 	$('.surveyButtons').prop('disabled', true);
-	socket.emit('point', 10)
 }
 
 /**
