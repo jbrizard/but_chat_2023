@@ -1,0 +1,14 @@
+#score{
+    font-size: 20px !important;
+    z-index: 10 !important;
+    position: fixed;
+    display: inline-block;
+    border: solid 2px hsl(0, 0%, 53%);
+    background: 0;
+    width: 26px;
+    color: #888;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
