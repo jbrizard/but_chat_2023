@@ -70,7 +70,13 @@ function receiveSearchYoutube(data)
 {
   console.log(data)
   //Pour chaque video, ajouté une miniature et le titre
-  data.items.forEach((video) => 
+  const filteredItems = data.items.filter((video) => video.id.kind !== "youtube#channel");
+
+  //Limite le nombre de vidéo à 3
+  const limitedItems = filteredItems.slice(0, 3);
+
+  // Pour chaque vidéo dans le résultat filtré limité, ajouter une vignette et un titre
+  limitedItems.forEach((video) => 
   {
     let resultElement = $(
       '<div class="result-youtube" videoid="' + video.id.videoId + '">' +
