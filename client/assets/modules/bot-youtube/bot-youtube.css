@@ -1,0 +1,116 @@
+.bot-youtube{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 100%;
+    height: 40vh;
+    border: solid 5px black;
+    vertical-align: middle;
+}
+
+#bot-youtube {
+    position: absolute;
+    top: 32%;
+    left: 25%;
+    min-width:50vw;
+    max-width: 60vw;
+    max-height: 50vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 50vh;
+    background-color: rgb(54, 54, 54);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius:8px;
+    padding: 2vh;
+    z-index: 2;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-content: center;
+    transition:all .5s;
+}
+
+#buttonYoutubePrevNext {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#youtube-results {
+	display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+	justify-content: center;
+}
+
+.hiddenYoutube {
+    display: none !important;
+}
+
+#open-youtube:focus  {
+	outline:none;
+}
+
+#open-youtube {
+	margin: 3px;
+	background:#ffffff;
+	cursor:pointer;
+    position: relative;
+}
+
+#open-youtube>img {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+}
+
+#message-youtube {
+	width:calc(100% - 200px);
+	padding: 0 10px;
+	height:31px;
+}
+
+#send-youtube {
+	width:100px;
+	padding:8px 0;
+	font-weight:bold;
+	background:#c42929;
+	color:#fff;
+	cursor:pointer;
+}
+#message-youtube, #send-youtube, #open-youtube, #prevButtonYoutube, #nextButtonYoutube{
+    margin: 0;
+    display:inline-block;
+	border:solid 2px #c42929;
+    border-radius:8px;
+    transition:all .4s;
+
+}
+
+.result-youtube {
+    display: flex;
+    flex-direction: column;
+    max-width: 15vw;
+    padding: 5px;
+}
+.result-youtube>span{
+    font-size: 75%;
+    color: #fff;
+    max-height: 20px;
+    padding: 10px;
+}
+#prevButtonYoutube, #nextButtonYoutube {
+    width:100px;
+	padding:8px 0;
+	font-weight:bold;
+	background:#c42929;
+	color:#fff;
+	cursor:pointer;
+}
+
+.disableYoutube {
+    opacity: 50%;
+}
+/****/

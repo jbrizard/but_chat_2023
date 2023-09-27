@@ -6,10 +6,13 @@
     
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script> <!-- fichier injecté par NodeJS -->
+        <script src="/modules/bot-youtube/bot-youtube.js" defer></script>
 
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="/modules/avatar/avatar.css" />
         <link rel="stylesheet" href="/modules/daffy/daffy.css" />
+
+        <link rel="stylesheet" href="/modules/bot-youtube/bot-youtube.css" />
         <link rel="stylesheet" href="/modules/file-sharing/file-sharing.css" />
         <link rel="stylesheet" href="modules/pendu/pendu.css" />
         <link rel="stylesheet" href="/modules/basket/basket.css" />
@@ -34,6 +37,7 @@
 					<input type="text" id="message-input" />
 					<input type="button" id="send-message" value="Envoyer" />
 
+
 					<input type="button" id="open-recording" value="🎙️" />
 
                     <div id="record-box">
@@ -53,7 +57,7 @@
                             <button class="stop">Annuler</button>
                         </div>
                     </div>
-
+                    <button id="open-youtube" value="Youtube"> <img src="../modules/bot-youtube/youtube.png" alt="Logo_Youtube"></button>
                     <button id="send-gif">Send gif</button>
         
                     <input type="file" id="file-input" accept=".mp3, .pdf, .rar, .zip, .mp4, .jpg, .png, .gif">
@@ -70,7 +74,19 @@
                 <div></div>
             </div>
         </div>
-        
+        <div id="bot-youtube" class="hiddenYoutube">
+            <div id="sendAndSearchYoutube">
+                <input type="text" id="message-youtube" />
+                <input type="button" id="send-youtube" value="Rechercher" />
+            </div>
+            <div id="youtube-results"></div>
+            <div id="buttonYoutubePrevNext">
+                <button id="prevButtonYoutube" class="disableYoutube"><</button>
+                <button id="nextButtonYoutube">></button>
+            </div>
+         </div>
+         
+         
 		<div id="help">
 				<div id="help-toggle">?</div>
 				<ul id="help-content">

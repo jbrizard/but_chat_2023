@@ -9,6 +9,8 @@ var moment = require('moment');
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var youtubeBot = require('./modules/bot-youtube.js');
+// const { youtube } = require('googleapis/build/src/apis/youtube/index.js');
 var feedback  = require('./modules/feedback.js');
 var connected  = require('./modules/connected.js');
 var avatar = require('./modules/avatar.js');
@@ -98,7 +100,8 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
-		
+    
+    
 		// Identifie la personne rechercher
 		identification.ping(io, socket.name, socket.id, message);
     
@@ -107,7 +110,22 @@ io.sockets.on('connection', function(socket)
 	
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
+	});
+
+	// Réception d'une recherche youtube
+	socket.on('youtubeSearch', function(youtubeSearch, pageToken) 
+	{
+		// Par sécurité, on encode les caractères spéciaux
+		youtubeSearch = ent.encode(youtubeSearch);
 		
+		// Transmet le message au bot Youtube (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		youtubeBot.handleYoutube(socket, youtubeSearch, pageToken);
+	});
+
+	//Reception de l'envoie de vidéo sur le chat
+	socket.on('sendVideo', function(videoid)
+	{
+		io.sockets.emit('new_message', {name:socket.name, message:`<iframe class="bot-youtube" src="https://www.youtube.com/embed/${videoid}?modestbranding=0&autostart=1&controls=1&showinfo=0"></iframe>`});
 	});
 
 	socket.on('start-game', function(mysteryWord)
