@@ -142,7 +142,6 @@ function voteBar(numVote1, numVote2)
 	var totalVote = numVote1 + numVote2;
 	var porcentNum1 = (numVote1 / totalVote)*48;
 	var porcentNum2 = (numVote2 / totalVote)*48;
-	console.log(numVote2);
 	$('#barNum1').css("width", porcentNum1+'%');
 	$('#barNum2').css("width", porcentNum2+'%');
 }

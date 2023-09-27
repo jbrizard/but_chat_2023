@@ -7,9 +7,7 @@ $('#tools').append(
 )
 
 function receivePoint(data)
-{
-    console.log(data.score);
-    
+{    
     $('#score').text(data.score);
     $('#input-create-survey').click(sendSurvey);
 }

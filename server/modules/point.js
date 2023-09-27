@@ -16,8 +16,7 @@ function handleNewConnection(socket, io)
 
     socket.on('message', function(data)
         {
-            console.log(data, 'rttt');
-            
+            data = data.toLowerCase();            
             switch (true) {
                 case data === "lolo et clecle <3" && pointCheck[0] === false:
                     pointCheck[0] = true;
@@ -35,7 +34,7 @@ function handleNewConnection(socket, io)
                     pointCheck[3] = true;
                     score +=5
                     break;
-                case data === "dokkan" && pointCheck[4] === false:
+                case data === "dokkan battle" && pointCheck[4] === false:
                     pointCheck[4] = true;
                     score +=15
                     break;
@@ -43,8 +42,6 @@ function handleNewConnection(socket, io)
                     data;
                     break;
             }
-            console.log(data);
-            console.log(typeof(data));
             if (data.includes("[b]"))
             {
                 // Réduisez le score de 5
@@ -58,7 +55,6 @@ function handleNewConnection(socket, io)
 
             if(score > 0)
             {
-                console.log(score, 'man');
                 socket.emit('disable_checkbox',true);
             }else
             {
