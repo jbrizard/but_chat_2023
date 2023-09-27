@@ -16,7 +16,7 @@ var YouTube = require('youtube-node');
 var youTube = new YouTube();
 
 // Entre la clé unique pour utiliser l'API Youtube
-youTube.setKey('AIzaSyCvhVH3bWqHvUE2MILcejO2NRY-7NcHigg');
+youTube.setKey('AIzaSyBN4CNwzsPtgAn80Nyn5wEjbzYFh-JIdho');
 
 /**
  * Le bot renvoie une vidéo youtube basé sur ce que l'utilisateur rentre

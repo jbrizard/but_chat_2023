@@ -26,15 +26,27 @@ document.querySelector('#send-youtube').addEventListener("click", () => searchOn
 //Envoyer la video sur le chat au click
 $(document).on('click', '.result-youtube', displayYoutube);
 
+// Ecouter le clic du bouton Suivant
+$('#nextButton').click(function () 
+{
+  searchOnYoutube(nextPageToken);
+});
+
+// Ecouter le clic du bouton Précédent 
+$('#prevButton').click(function () 
+{
+  searchOnYoutube(prevPageToken);
+});
+
 /**
  * Affichage de la vidéo youtube dans le chat
  */
 function displayYoutube() 
 {
-    console.log("Clicked on video: ");
-    var videoId = $(this).attr("videoid");
-    socket.emit('sendVideo', videoId);
-  }
+  console.log("Clicked on video: ");
+  var videoId = $(this).attr("videoid");
+  socket.emit('sendVideo', videoId);
+}
 
 /**
  * Vider les résultas Youtube
@@ -50,27 +62,35 @@ function emptyYoutubeResults()
  */
 function receiveSearchYoutube(data) 
 {
-
-  data.items.forEach((video) => {
+  //Pour chaque video, ajouté une miniature et le titre
+  data.items.forEach((video) => 
+  {
     let resultElement = $(
       '<div class="result-youtube" videoid="' + video.id.videoId + '">' +
       `<img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.thumbnails.default.url}" class="youtube-thumbnail">` +
       `<span>${video.snippet.title}</span>` +
       '</div>'
     );
-
+    //Mettre les résultats
     $('#youtube-results').append(resultElement);
   });
 
-  if(data.nextPageToken != undefined){
+  // Vérifier si les pages Token ne sont pas vide 
+  if(data.nextPageToken != undefined)
+  {
     nextPageToken = data.nextPageToken;
-  }else{
+  }
+  else
+  {
     nextPageToken = null;
   }
 
-  if(data.prevPageToken != undefined){
+  if(data.prevPageToken != undefined)
+  {
     prevPageToken = data.prevPageToken;
-  }else{
+  }
+  else
+  {
     prevPageToken = null;
   }
   
@@ -87,27 +107,12 @@ function searchOnYoutube(pageToken)
 
   // On n'envoie pas un message vide
   if (searchYoutube == '') return;
+
+  //Vide les résultats
   emptyYoutubeResults();
+
   console.log('Lancement de la recherche sur Youtube (front)');
 
   // Envoi le message au serveur pour broadcast
   socket.emit('youtubeSearch', searchYoutube, pageToken);
-}
-
-
-// Ecouter le clique du bouton Suivant
-$('#nextButton').click(function () {
-  console.log(nextPageToken.selector);
-  searchOnYoutube(nextPageToken);
-});
-
-// Ecouter le clique du bouton Précédent 
-$('#prevButton').click(function () {
-  console.log(prevPageToken.selector);
-  searchOnYoutube(prevPageToken);
-});
-
-
-// youtubeNextPageToken: result.nextPageToken,
-// youtubePrevPageToken: result.previousPageToken
-// {pageToken: pageTokens}
+};
