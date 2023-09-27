@@ -24,7 +24,8 @@ function handleNewConnection(socket, io)
             console.log('test');
 
                 score +=data
-                if(score > 0){
+                if(score > 0)
+                {
                     console.log(score);
                     socket.emit('disable_checkbox',true);
                 }else
@@ -38,8 +39,8 @@ function handleNewConnection(socket, io)
 }
 
 function replaceTag(message){
-    message = message.replace("[b]", "<span class='bold'>");
-    message = message.replace("[cr]", "<span class='color-red'>");
+    message = message.replace("[b]", "<span class='bg-c'>");
+    message = message.replace("[cr-b]", "<span class='cr-b'>");
     message = message.replace("[]", "</span>");
     return message
 }

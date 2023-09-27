@@ -146,11 +146,31 @@ h1{
 #utilPoint{
 	position: absolute;
 	padding: 10px;
-	top: 650px;
-	right: 200px;
+	top: 570px;
+	right: 170px;
 	background-color: white;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	border-radius: 8px;
+}
+#utilPoint>p{
+	font-weight: 700;
+}
+#utilPoint>div{
+	display: flex;
+	flex-direction: row;
+}
 
+#Achevement{
+	position: absolute;
+	padding: 10px;
+	top: 470px;
+	left: 170px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	border-radius: 8px;
+}
+#Achevement>p:first-of-type{
+	font-weight: 700;
 }

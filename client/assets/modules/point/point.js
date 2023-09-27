@@ -68,6 +68,19 @@ function hilightMessage(message)
     {
         message = '[b]'+message+'[]';
         socket.emit('point', -5);
+        $('#message-red-bold').prop( "checked", false );
+
+    }
+    return message;
+}
+
+function boldRedMessage(message)
+{  
+    if ($('#message-red-bold').is(':checked'))
+    {
+        $('#message-hilight').prop( "checked", false );
+        message = '[cr-b]'+message+'[]';
+        socket.emit('point', -5);
     }
     return message;
 }
@@ -77,6 +90,12 @@ function disbaleCheckbox(data){
     if(data == false){
         $('#message-hilight').prop( "checked", false );
         $('#message-hilight').prop("disabled", true);
+        $('#message-red-bold').prop( "checked", false );
+        $('#message-red-bold').prop("disabled", true);
     }else
+    {
         $('#message-hilight').prop("disabled", false);
+        $('#message-red-bold').prop("disabled", false);
+    }
 }
+
