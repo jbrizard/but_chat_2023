@@ -11,6 +11,7 @@ var daffy = require('./modules/daffy.js');
 var survey = require('./modules/survey.js');
 var point = require('./modules/point.js')
 
+
 // Initialisation du serveur HTTP
 var app = express();
 
@@ -33,8 +34,7 @@ io.sockets.on('connection', function(socket)
 {
 	survey.handleNewConnection(socket, io);
 	point.handleNewConnection(socket, io);
-
-
+	
 	// Arrivée d'un utilisateur
 	socket.on('user_enter', function(name)
 	{

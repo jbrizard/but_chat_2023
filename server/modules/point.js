@@ -19,10 +19,10 @@ function handleNewConnection(socket, io)
     var score = 0;
     console.log('zqgrqg,lqlg,rq');
     
-    socket.on('point', function(awesomeCheck)
+    socket.on('point', function(pointCheck)
         {
             console.log('test');
-            if (awesomeCheck==true) {
+            if (pointCheck==true) {
                 score +=10;
                     console.log(score);
                     socket.emit('point_view', 

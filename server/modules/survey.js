@@ -25,6 +25,7 @@ function handleNewConnection(socket, io)
         // survey = ent.encode(survey.surveyValue);
         numVote1 = 0;
         numVote2 = 0;
+        
         choice1 = survey['choice1'];
         choice2 = survey['choice2'];
         // Transmet le message à tous les utilisateurs (broadcast)

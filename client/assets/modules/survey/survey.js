@@ -1,4 +1,4 @@
-socket.on('new_survey', receiveSurvey);
+	socket.on('new_survey', receiveSurvey);
 socket.on('new_time', receiveTime);
 socket.on('new_count', receiveCount);
 socket.on('new_winner', receiveWinner);
@@ -116,8 +116,10 @@ function surveyClickCount()
 	var addVote = 1;
 	var counter = {addVote, n}
 	var countId = this.id
+	var pointCheck = true
 	socket.emit('count', counter, countId);
-	$('.surveyButtons').prop('disabled', true);	
+	$('.surveyButtons').prop('disabled', true);
+	socket.emit('point', pointCheck)
 }
 
 /**

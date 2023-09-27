@@ -1,103 +1,64 @@
-// socket.on('point_view', pointView);
+var socket = io.connect(':8090');
+socket.on('point_view', pointView);
 
-// // var awesomeCheck = 0;
+var pointCheck = [false, false, false, false, false];
 
+$('#tools').append(
+    '<span id="score" class="score">' + 0 + '</span>' 
+)
 
-// // function sendPoint()
-// // {
-
-// //     var input = $('#message-input');
-
-// //     input.submit(function (e) {
-// //         e.preventDefault(); // Empêche le formulaire de se soumettre normalement
-// //         const awesome= champTexte.val().toLowerCase(); // Récupérez le texte en minuscules
-
-// //         // Vérifiez si le texte contient "awesome"
-// //         if (awesome.includes("awesome") && awesomeCheck==0) {
-// //             var awesomeCheck = true
-// //             console.log('1st step');
-// //             socket.emit('point', awesomeCheck);
-// //         } else {
-// //             awesome.empty(); // Efface le résultat précédent
-// //         }
-
-        
-// //     });
-
-
-// $('#send-message').click(sendPoint);
-// var awesomeCheck = false;
-
-// console.log('1st step 1');
-// // }
-// function sendPoint() {
-   
-
-//     // console.log(input);
-//     ; // Initialisez awesomeCheck à false en dehors de la fonction
-    
-//     // const awesome = input.val().toLowerCase(); // Récupérez la valeur de l'input
-//     var awesome = $('#message-input').val();
-//     var papa1 = $('#message-input');
-// 	var papa = papa1.val();
-//     console.log(papa);
-//     console.log('1st step 1 ff');
-//     // Vérifiez si la valeur contient "awesome" et si awesomeCheck est à false
-//     if (awesome.includes("awesome") && awesomeCheck==false) {
-//         awesomeCheck = true; // Définissez awesomeCheck sur true pour éviter les répétitions
-//         console.log('1st step 2');
-//         socket.emit('point', awesomeCheck);
-//     } else {
-//         // input.val(''); // Effacez le contenu de l'input
-//     }
-    
-// }
-
-
-// function pointView(data)
-// {
-
-
-// 	$('#tools').append(
-// 		'<div id="pointView">'+
-//             '<p id="score">'+data.score+'</p>'
-// 		+'</div>'
-// 	)
-// 	$('#input-create-survey').click(sendSurvey);
-// }
-
-// Assurez-vous que la variable awesomeCheck est définie en dehors de la fonction sendPoint.
-var awesomeCheck = false;
-
-// Cette ligne doit être en dehors de la fonction sendPoint.
 $('#send-message').click(sendPoint);
 
-function sendPoint() {
-    // Vous pouvez obtenir la valeur de l'input directement dans la fonction.
-    console.log($('#message-input').val())
-    var awesome = $('#message-input').val();
-    console.log('1st step 1');
-    console.log(awesome);
-    
-    // Vérifiez si la valeur contient "awesome" et si awesomeCheck est à false
-    if (awesome.includes("awesome") && !awesomeCheck) {
-        awesomeCheck = true; // Définissez awesomeCheck sur true pour éviter les répétitions
-        console.log('1st step 2');
-        socket.emit('point', awesomeCheck);
-    } else {
-        // Si vous souhaitez effacer le contenu de l'input, vous pouvez le faire ici.
-        // $('#message-input').val('');
+$('#message-input').keyup(function(evt)
+{
+	if (evt.keyCode == 13) // 13 = touche Entrée
+		sendPoint();
+});
+
+
+function sendPoint(message)
+{
+
+    console.log(message);
+
+    switch (true) {
+        case message === "lolo et clecle <3" && pointCheck[0] === false:
+            pointCheck[0] = true;
+            socket.emit('point', pointCheck[0]);
+            break;
+        case message === "merci" && pointCheck[1] === false:
+            pointCheck[1] = true;
+            console.log('1st step 2');
+            socket.emit('point', pointCheck[1]);
+            break;
+        case message === "bonjour" && pointCheck[2] === false:
+            pointCheck[2] = true;
+            console.log('1st step 2');
+            socket.emit('point', pointCheck[2]);
+            break;
+        case message === "bg" && pointCheck[3] === false:
+            pointCheck[3] = true;
+            console.log('1st step 2');
+            socket.emit('point', pointCheck[3]);
+            break;
+        case message === "dokkan" && pointCheck[4] === false:
+            pointCheck[4] = true;
+            console.log('1st step 2');
+            socket.emit('point', pointCheck[4]);
+            break;
+        default:
+            console.log('papapa');
+            console.log(pointCheck, 'check2');
+            break;
     }
 }
 
-function pointView(data) {
-    $('#tools').append(
-        '<div id="pointView">' +
-        '<p id="score">' + data.score + '</p>' +
-        '</div>'
-    );
-    // Assurez-vous que l'élément #input-create-survey existe dans votre HTML
+function pointView(data)
+{
+
+    $('#score').text(data.score);
     $('#input-create-survey').click(sendSurvey);
+
 }
 
 
