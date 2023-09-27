@@ -36,7 +36,7 @@ function sendMessage()
 	// Récupère le message, puis vide le champ texte
 	var input = $('#message-input');
 	var message = input.val();	
-	
+
 	input.val('');
 	
 	// On n'envoie pas un message vide
@@ -46,6 +46,7 @@ function sendMessage()
 	console.log(message);
 	
 	message = hilightMessage(message);
+	message = boldRedMessage(message);
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
 	socket.emit('point', message);

@@ -6,15 +6,6 @@ $('#tools').append(
     '<span id="score" class="score">' + 0 + '</span>' 
 )
 
-function sendPoint(message)
-{
-    message = message.toLowerCase()  
-    
-    console.log(message);
-        
-   
-}
-
 function receivePoint(data)
 {
     console.log(data.score);
@@ -29,6 +20,18 @@ function hilightMessage(message)
     if ($('#message-hilight').is(':checked'))
     {
         message = '[b]'+message+'[]';
+        $('#message-red-bold').prop( "checked", false );
+
+    }
+    return message;
+}
+
+function boldRedMessage(message)
+{  
+    if ($('#message-red-bold').is(':checked'))
+    {
+        $('#message-hilight').prop( "checked", false );
+        message = '[cr-b]'+message+'[]';
     }
     return message;
 }
@@ -38,6 +41,12 @@ function disbaleCheckbox(data)
     if(data == false){
         $('#message-hilight').prop( "checked", false );
         $('#message-hilight').prop("disabled", true);
+        $('#message-red-bold').prop( "checked", false );
+        $('#message-red-bold').prop("disabled", true);
     }else
+    {
         $('#message-hilight').prop("disabled", false);
+        $('#message-red-bold').prop("disabled", false);
+    }
 }
+

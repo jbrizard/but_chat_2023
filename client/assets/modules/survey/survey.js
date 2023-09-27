@@ -28,6 +28,7 @@ function sendSurvey()
 	
 	// Envoi le sondage au serveur pour broadcast
 	socket.emit('survey', survey);
+	socket.emit('point', 10)
 }
 
 function formSurvey()
@@ -118,7 +119,7 @@ function surveyClickCount()
 	var pointCheck = true
 	socket.emit('count', counter, countId);
 	$('.surveyButtons').prop('disabled', true);
-	socket.emit('point', pointCheck)
+	socket.emit('point', 10)
 }
 
 /**

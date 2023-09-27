@@ -44,7 +44,11 @@ function handleNewConnection(socket, io)
                     break;
             }
             console.log(score);
-            if (data.includes("[b]" || "[cr]" )) {
+            if (data.includes("[b]")) {
+                // Réduisez le score de 5
+                score -= 5;
+            }
+            if (data.includes("[cr-b]")) {
                 // Réduisez le score de 5
                 score -= 5;
             }
@@ -67,8 +71,8 @@ function handleNewConnection(socket, io)
 }
 
 function replaceTag(message){
-    message = message.replace("[b]", "<span class='bold'>");
-    message = message.replace("[cr]", "<span class='color-red'>");
+    message = message.replace("[b]", "<span class='bg-c'>");
+    message = message.replace("[cr-b]", "<span class='cr-b'>");
     message = message.replace("[]", "</span>");
     return message
 }
