@@ -99,12 +99,10 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
 		
-    daffy.onMessage(io, message);
-
 		// Identifie la personne rechercher
 		identification.ping(io, socket.name, socket.id, message);
     
-    //Transmet le message au module bot-blague
+    	//Transmet le message au module bot-blague
 		blague.handleBlague(io, message);
 	
 		// Transmet le message au module Basket
