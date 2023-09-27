@@ -12,8 +12,14 @@ module.exports =  {
 /**
  * On transmet une image (file) qui est ajoutée temporairement au serveur
  */
-function editMessage(io, socket, data)
+function editMessage(io, socket, data, messageHistory)
 {
+	messageHistory = messageHistory.map((message) => {
+		if(message.idMessage == data.id.replace("edit-input-", ""))
+		{
+			message.message = data.message;
+		}
+	})
 	// Envoyer le nouveau message à tout le monde
 	io.sockets.emit('new_message_edited', {message:data.message, socketId: socket.id, idMessage : data.id });
 	

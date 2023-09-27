@@ -4,7 +4,6 @@ var myId = '';
 socket.on('myId', (id) => 
 {
     setMyId(id);
-    console.log(myId);
     
 })
 
@@ -15,7 +14,7 @@ socket.on('new_message', () =>
     $('.message-' + myId).hover(function() 
     {
         $(this).find('.edit').remove();
-        if ($("input").hasClass("edit-input") == false) 
+        if ($("textarea").hasClass("edit-input") == false && $("containerMessageCtr > span").hasClass("deletedMessage") == false) 
         {
             $(this).append('<div class="edit"><button onclick="editMessage($(this).parent().parent().attr(\'id\'))">🖊️</button></div>');
         }
@@ -29,7 +28,7 @@ socket.on('new_message', () =>
 // Reception des messages edités
 socket.on('new_message_edited', (data) =>
 {
-    editMessageForAll(data);
+    updateEditedMessageForAll(data);
 })
 
 
@@ -47,11 +46,8 @@ function submitEdition (evt, thisElt)
     // récupérer id
     const id = evt.srcElement.id
 
-    if (evt.keyCode == 13) 
-    {
-        // Envoyer le nouveau message au serveur
-        socket.emit('submit_edited_message', {message: newMessage, id: id});
-    }
+    // Envoyer le nouveau message au serveur
+    socket.emit('submit_edited_message', {message: newMessage, id: id});
 };
 
 // Apparition de l'input qui changera le texte du message
@@ -60,20 +56,21 @@ function editMessage(id)
     $('#' + id + " > .message-container > .message-content")
     .replaceWith(function() 
     {
-        return $("<div>").append(
-            $("<input>", 
+        return $("<div>", {class: "edit-input-container"}).append(
+            $("<textarea>", 
             {
                 id: "edit-input-" + id,
                 class: "edit-input",
                 type: "text",
-                value: $(this).text(),
+                val: $(this).text(),
                 placeholder: "Edit message",
-                onkeyup: `if (event.keyCode === 13) submitEdition(event, $(this));`
+                onkeydown: `if (event.keyCode === 13 && event.ctrlKey) submitEdition(event, $(this));`
             }),
             $("<span>", 
             {
-                class: "additional-span",
-                text: "Additional content"
+                class: "edit-instructions",
+                text: "Appuyer sur [Ctrl] + [Entrée] pour valider",
+                
             })
         );
     });
@@ -81,48 +78,45 @@ function editMessage(id)
 
 
 // Fonction pour modifier le message pour tout les utilisateurs
-function editMessageForAll (data)
+function updateEditedMessageForAll (data)
 {
     const {message, socketId, idMessage} = data;
     const contentMessageCtr = "#" + idMessage.replace("edit-input-", "") + ' > .message-container > .message-content';
     const containerMessageCtr = "#" + idMessage.replace("edit-input-", "") + ' > .message-container';
-    const newMessage = message.length > 0 ? message : "Supprimé"
 
     if (socketId == myId) {
         $('#' + idMessage).parent()
-    .replaceWith(function() 
+        .replaceWith(function() 
     {
         return $("<span>", 
         {
             class: "message-content",
             text: message
         }
-        )
+        );
     });
     } else {
         $(contentMessageCtr).replaceWith(function()
         {
             return $("<span>", 
             {
-                class: "message-content" + message.length == 0 && "deletedMessage",
+                class: "message-content",
                 text: message
             }
-            )
+            );
         })
     }
-    if ($(containerMessageCtr +" > span").hasClass("editedMessage") == false) 
+    if ($(containerMessageCtr +" > span").hasClass("editedMessage") == false && $(containerMessageCtr +" > span").hasClass("deletedMessage") == false) 
     {
         $(containerMessageCtr).append(
             $("<span>",
             {
-                class: "editedMessage",
-                text: message.length > 0 ? "Modifié" : "Supprimé"
+                class: message.length > 0  && /[a-zA-Z]/.test(message) ? "editedMessage" : "deletedMessage",
+                text: message.length > 0  && /[a-zA-Z]/.test(message) ? "(Modifié)" : "(Supprimé)"
             })
         )
     } else {
-        $(".editedMessage").text(message.length > 0 ? "Modifié" : "Supprimé");
+        $(".editedMessage").attr("class", message.length > 0  && /[a-zA-Z]/.test(message) ? "editedMessage" : "deletedMessage").text(message.length > 0  && /[a-zA-Z]/.test(message) ? "(Modifié)" : "(Supprimé)");
     }
-    
-    
     
 }

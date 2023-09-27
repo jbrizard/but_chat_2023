@@ -5,6 +5,7 @@ var ioLib = require('socket.io');	// WebSocket
 var ent = require('ent');		// Librairie pour encoder/décoder du HTML
 var path = require('path');		// Gestion des chemins d'accès aux fichiers	
 var fs = require('fs');			// Accès au système de fichier
+var moment = require('moment');
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
@@ -54,14 +55,17 @@ io.sockets.on('connection', function(socket)
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
 
+		// Date
+		const date = Date.now();
+
 		// ID du message
-		const idMessage = socket.id + Date.now();
+		const idMessage = socket.id + date;
 
 		// Ajoute le message à la liste des messages
-		messageHistory.push({name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar, idMessage : idMessage });
+		messageHistory.push({name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar, idMessage : idMessage, date: moment(date).locale('fr').calendar() });
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar, idMessage : idMessage });
+		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar, idMessage : idMessage, date: moment(date).locale('fr').calendar() });
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
@@ -76,7 +80,7 @@ io.sockets.on('connection', function(socket)
 	// Modification d'un message
 	socket.on('submit_edited_message', (data) => 
 	{
-		editMessage.editMessage(io, socket, data);
+		editMessage.editMessage(io, socket, data, messageHistory);
 	}
 	)
 });
