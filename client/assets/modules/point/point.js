@@ -1,4 +1,5 @@
 socket.on('point_view', pointView);
+socket.on('disable_checkbox', disbaleCheckbox);
 
 var pointCheck = [false, false, false, false, false];
 
@@ -69,4 +70,13 @@ function hilightMessage(message)
         socket.emit('point', -5);
     }
     return message;
+}
+
+function disbaleCheckbox(data){
+    console.log(data);
+    if(data == false){
+        $('#message-hilight').prop( "checked", false );
+        $('#message-hilight').prop("disabled", true);
+    }else
+        $('#message-hilight').prop("disabled", false);
 }

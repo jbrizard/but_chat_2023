@@ -22,14 +22,18 @@ function handleNewConnection(socket, io)
     socket.on('point', function(data)
         {
             console.log('test');
-            
-                score +=data;
+
+                score +=data
+                if(score > 0){
                     console.log(score);
-                    socket.emit('point_view', 
-                    {
-                        score:score
-                    });
-            
+                    socket.emit('disable_checkbox',true);
+                }else
+                    socket.emit('disable_checkbox',false);
+                socket.emit('point_view', 
+                {
+                    score:score
+                });
+                
         });	
 }
 
