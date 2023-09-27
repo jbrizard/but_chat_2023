@@ -6,11 +6,12 @@
     
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script> <!-- fichier injecté par NodeJS -->
-        
+
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="/modules/avatar/avatar.css" />
         <link rel="stylesheet" href="/modules/daffy/daffy.css" />
         <link rel="stylesheet" href="/modules/file-sharing/file-sharing.css" />
+        <link rel="stylesheet" href="modules/pendu/pendu.css" />
         <link rel="stylesheet" href="/modules/basket/basket.css" />
         <link rel="stylesheet" href="/modules/gif-api/gif-api.css" />
 
@@ -28,11 +29,35 @@
             </div>
 			<div id="tools">
 
+                    <input type="button" id="start-game" value="🎮">    
+
 					<input type="text" id="message-input" />
 					<input type="button" id="send-message" value="Envoyer" />
+
+					<input type="button" id="open-recording" value="🎙️" />
+
+                    <div id="record-box">
+                        <button id="startRecording">Start</button>
+                        <button id="stopRecording">Stop</button>
+                        <button id="sendRecord">Envoyer</button>
+                        <!-- <audio src="" id="audioElement" controls></audio> -->
+                    </div>
+
+                    <div id="game-box" class="hidden">
+                        <div id="game-selection">
+                            <button class="game-icone" id="pendu-icone">Pendu</button>
+                        </div>
+                        <div id="pendu-menu" class="hidden">
+                            <button class="yes">Je choisi le mot</button>
+                            <button class="api">Mot aléatoire</button>
+                            <button class="stop">Annuler</button>
+                        </div>
+                    </div>
+
                     <button id="send-gif">Send gif</button>
+        
                     <input type="file" id="file-input" accept=".mp3, .pdf, .rar, .zip, .mp4, .jpg, .png, .gif">
-			</div>
+		</div>
         </div>
 
         <div id="gif-panel">
@@ -89,6 +114,7 @@
         <script type="text/javascript" src="chat.js"></script>
         <script type="text/javascript" src="/modules/gif-api/gif-api.js"></script>
         <script type="text/javascript" src="/modules/file-sharing/file-sending.js"></script>
+
         <script type="text/javascript" src="/modules/feedback/feedbackClient.js"></script>
         <script type="text/javascript" src="/modules/connected/connectedClient.js"></script>
         <script type="text/javascript" src="/modules/identification/identificationClient.js"></script>
@@ -97,5 +123,7 @@
         <script type="text/javascript" src="modules/basket/basket.js"></script>
         <script type="text/javascript" src="/modules/history/history.js"></script>
         <script type="text/javascript" src="/modules/editMessage/editMessage.js"></script>
+        <script type="text/javascript" src="modules/vocaux/lame.all.js"></script>
+        <script type="text/javascript" src="modules/vocaux/vocaux.js" ></script>
     </body>
 </html>

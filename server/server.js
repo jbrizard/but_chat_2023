@@ -16,6 +16,7 @@ var identification = require('./modules/identification.js');
 var blague = require('./modules/bot-blague.js');
 var fileSharing = require('./modules/file-sharing.js');
 var basket = require('./modules/basket.js');
+var pendu = require('./modules/pendu.js');
 var gifAPI = require('./modules/gif-api.js');
 var history = require('./modules/history.js');
 var editMessage = require('./modules/editMessage.js');
@@ -30,6 +31,9 @@ var io = ioLib(server, {
 		maxHttpBufferSize: 10 * 1024 * 1024, //10MB
 });
 
+
+// Initialisation du jeu Pendu
+var startPendu = false;
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
 {
@@ -47,9 +51,6 @@ const messageHistory = [];
 // Gestion des connexions au socket
 io.sockets.on('connection', function(socket)
 {
-	// Ajoute le client au jeu de basket
-	basket.addClient(socket);
-
 	// Arrivée d'un utilisateur
 	socket.on('user_enter', function(name)
 	{
@@ -72,8 +73,13 @@ io.sockets.on('connection', function(socket)
 	// Réception d'un message
 	socket.on('message', function(message)
 	{
+		//Si le jeu a commencé on verifie si le joueur joue bien
+		
+
+
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
+
 
 		// Date
 		const date = Date.now();
@@ -87,7 +93,12 @@ io.sockets.on('connection', function(socket)
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar, idMessage : idMessage, date: moment(date).locale('fr').calendar() });
 		
+	
+		pendu.handleReponse(io, message);
+		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
+		daffy.handleDaffy(io, message);
+		
     daffy.onMessage(io, message);
 
 		// Identifie la personne rechercher
@@ -98,6 +109,12 @@ io.sockets.on('connection', function(socket)
 	
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
+		
+	});
+
+	socket.on('start-game', function(mysteryWord)
+	{
+		pendu.handlePendu(io, mysteryWord)   
 	});
 
 	// Un utilisateur est en train d'écrire
