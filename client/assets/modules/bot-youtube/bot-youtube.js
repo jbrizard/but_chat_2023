@@ -68,10 +68,10 @@ function emptyYoutubeResults()
  */
 function receiveSearchYoutube(data) 
 {
+  console.log(data)
   //Pour chaque video, ajouté une miniature et le titre
   data.items.forEach((video) => 
   {
-    console.log(video);
     let resultElement = $(
       '<div class="result-youtube" videoid="' + video.id.videoId + '">' +
       `<img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.thumbnails.medium.url}" class="youtube-thumbnail">` +

@@ -16,15 +16,14 @@ var YouTube = require('youtube-node');
 var youTube = new YouTube();
 
 // Entre la clé unique pour utiliser l'API Youtube
-youTube.setKey('AIzaSyCjib9mUkUShJER6vXn95SevYIxKFOfwbI');
+youTube.setKey('AIzaSyDrjtxylM2qHRr_54xwuSaTQKq8NEuFhi0');
 
 /**
  * Le bot renvoie une vidéo youtube basé sur ce que l'utilisateur rentre
  */
 function handleYoutube(socket, youtubeSearch, pageToken) 
 {
-    youTube.search(youtubeSearch, 3, {pageToken: pageToken}, function(error, result) 
-    {
+    youTube.search(youtubeSearch, 3, {pageToken: pageToken}, function(error, result) {
       //Envoyer la vidéo Youtube
       socket.emit('new_youtubeSearch', result);
     });
