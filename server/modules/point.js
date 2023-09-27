@@ -1,25 +1,36 @@
+/*
+ * Nom : Point !
+ * Description : Ce module fait des sondages incroyables !
+ * Auteur(s) : Lolo et clecle
+ */
+
+
+
 module.exports =  {
 	handleNewConnection: handleNewConnection, // permet d'appeler cette méthode dans server.js
 }
 
 
-var score;
+
 
 function handleNewConnection(socket, io)
 {
+    var score = 0;
+    console.log('zqgrqg,lqlg,rq');
+    
     socket.on('point', function(awesomeCheck)
         {
-            if (awesomeCheck == true) {
+            console.log('test');
+            if (awesomeCheck==true) {
                 score +=10;
-            }
+                    console.log(score);
+                    socket.emit('point_view', 
+                    {
+                        score:score
+                    });
+            }      
             
-            // Transmet le message à tous les utilisateurs (broadcast)
-            io.sockets.emit('point_view', 
-                {
-                    score:score
-                }
-            );
-            clearInterval(interval);
-            timer(io, socket);
+
+            
         });	
 }
