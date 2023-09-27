@@ -10,6 +10,7 @@ var fs = require('fs');			// Accès au système de fichier
 var daffy = require('./modules/daffy.js');
 var avatar = require('./modules/avatar.js');
 var history = require('./modules/history.js');
+var editMessage = require('./modules/editMessage.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -39,7 +40,7 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
-		socket.avatar = "./modules/avatar/defaultAvatar.png"
+		socket.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU"
 
 		// Envoyer l'historique des messages au nouveau client qui se connecte
 		history.getHistory(io, socket, messageHistory, name);
@@ -53,11 +54,14 @@ io.sockets.on('connection', function(socket)
 		// Par sécurité, on encode les caractères spéciaux
 		message = ent.encode(message);
 
+		// ID du message
+		const idMessage = socket.id + Date.now();
+
 		// Ajoute le message à la liste des messages
-		messageHistory.push({name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar });
+		messageHistory.push({name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar, idMessage : idMessage });
 		
 		// Transmet le message à tous les utilisateurs (broadcast)
-		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar });
+		io.sockets.emit('new_message', {name:socket.name, message:message, socketId: socket.id, avatar: socket.avatar, idMessage : idMessage });
 		
 		// Transmet le message au module Daffy (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
 		daffy.handleDaffy(io, message);
@@ -68,6 +72,13 @@ io.sockets.on('connection', function(socket)
 	{
 		avatar.addAvatar(io, socket, image, callback, messageHistory);
 	});
+
+	// Modification d'un message
+	socket.on('submit_edited_message', (data) => 
+	{
+		editMessage.editMessage(io, socket, data);
+	}
+	)
 });
 
 // Lance le serveur sur le port 8090 (http://localhost:8090)

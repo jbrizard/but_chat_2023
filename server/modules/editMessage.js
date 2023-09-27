@@ -6,15 +6,16 @@
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
 module.exports =  {
-	editMessage: editMessage // permet d'appeler cette méthode dans server.js -> message.editMessage(...)
+	editMessage: editMessage // permet d'appeler cette méthode dans server.js -> editMessage.editMessage(...)
 }
 
 /**
  * On transmet une image (file) qui est ajoutée temporairement au serveur
  */
-function editMessage(io, socket, avatar, callback)
+function editMessage(io, socket, data)
 {
-	// envoie le nouvel avatar à l'utilisateur
-	// socket.emit('new_avatar', {socketId: socket.id, avatar: socket.avatar});
+	// Envoyer le nouveau message à tout le monde
+	io.sockets.emit('new_message_edited', {message:data.message, socketId: socket.id, idMessage : data.id });
+	
 
 }

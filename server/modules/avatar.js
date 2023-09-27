@@ -35,7 +35,7 @@ function addAvatar(io, socket, avatar, callback, history)
 		{
 			callback({ message: err ? "failure : " + err : "success" });
 			if (err) {
-				socket.avatar = "./modules/avatar/defaultAvatar.png";
+				socket.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU";
 			}
 		});
 		socket.avatar = "./tmp/upload/" + fileName;
@@ -43,7 +43,7 @@ function addAvatar(io, socket, avatar, callback, history)
 	}
 	else 
 	{
-		socket.avatar = "./modules/avatar/defaultAvatar.png";
+		socket.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU";
 	}
 	history.map((item) => 
 	{
@@ -53,7 +53,7 @@ function addAvatar(io, socket, avatar, callback, history)
 		}
 	})
 	// Suppression de l'ancienne image
-	if (previousAvatar != socket.avatar && previousAvatar != undefined) 
+	if (previousAvatar != socket.avatar && previousAvatar != undefined && previousAvatar !== "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU" ) 
 	{
 		var transformedPath = path.resolve("../client/assets", previousAvatar);
 		fs.unlinkSync(transformedPath, (err) => {

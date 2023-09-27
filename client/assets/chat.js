@@ -49,8 +49,8 @@ function sendMessage()
 function receiveMessage(data)
 {
 	$('#chat #messages').append(
-		'<div id="' + data.socketId + Date.now() + '" class="message message-' + data.socketId + '">'
-			+ `<img class='avatar ${data.socketId}' src="${ data.avatar ? data.avatar : "./modules/avatar/defaultAvatar.png" }"  />`
+		'<div id="' + data.idMessage + '" class="message message-' + data.socketId + '">'
+			+ `<img class='avatar ${data.socketId}' src="${ data.avatar ? data.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU" }"  />`
 			+ '<div class="message-container">'
 			+ '<span class="user">' + data.name  + '</span> ' 
 			+ '<span class="message-content">' + data.message + '</span>'
