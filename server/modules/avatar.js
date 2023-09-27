@@ -46,7 +46,7 @@ function addAvatar(io, socket, avatar, callback)
 		socket.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU";
 	}
 	// Suppression de l'ancienne image
-	if (previousAvatar != socket.avatar && previousAvatar != undefined) 
+	if (previousAvatar != socket.avatar && previousAvatar != undefined && previousAvatar !== "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU") 
 	{
 		var transformedPath = path.resolve("../client/assets", previousAvatar);
 		fs.unlinkSync(transformedPath, (err) => {
