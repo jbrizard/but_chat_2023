@@ -2,8 +2,6 @@
 server/node_modules/*
 !server/node_modules/readme.txt
 client/assets/uploads/*
-client/assets/tmp/upload/*
 !client/assets/uploads/.gitkeep
-!client/assets/tmp/upload/.gitkeep
 server/package.json
 server/package-lock.json

@@ -26,20 +26,20 @@ function addAvatar(io, socket, avatar, callback)
 		const fileName = socket.id + "-" + Date.now() + ext;
 
 		// Crée le dossier 'tmp' s'il n'existe pas
-		var dir = '../client/assets/tmp/upload/';
+		var dir = '../client/assets/uploads/';
         if (!fs.existsSync(dir)){
             fs.mkdirSync(dir, { recursive: true });
         }
 
 		// Enregistre le fichier temporairement
-		fs.writeFile("../client/assets/tmp/upload/" + fileName, avatar.file, (err) => 
+		fs.writeFile("../client/assets/uploads/" + fileName, avatar.file, (err) => 
 		{
 			callback({ message: err ? "failure : " + err : "success" });
 			if (err) {
 				socket.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU";
 			}
 		});
-		socket.avatar = "./tmp/upload/" + fileName;
+		socket.avatar = "./uploads/" + fileName;
 	}
 	else 
 	{
