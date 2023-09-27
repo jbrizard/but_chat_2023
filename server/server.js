@@ -8,6 +8,7 @@ var fs = require('fs');			// Accès au système de fichier
 
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
+var fileSharing = require('./modules/file-sharing.js');
 var basket = require('./modules/basket.js');
 
 // Initialisation du serveur HTTP
@@ -16,7 +17,9 @@ var app = express();
 var server = http.createServer(app);
 
 // Initialisation du websocket
-var io = ioLib(server);
+var io = ioLib(server, {
+		maxHttpBufferSize: 10 * 1024 * 1024, //10MB
+});
 
 // Traitement des requêtes HTTP (une seule route pour l'instant = racine)
 app.get('/', function(req, res)
@@ -57,6 +60,11 @@ io.sockets.on('connection', function(socket)
 		
 		// Transmet le message au module Basket
 		basket.onMessage(io, message);
+	});
+
+	socket.on('send_file', function(props)
+	{
+		fileSharing.handleFile(io, socket.name, props);
 	});
 });
 
