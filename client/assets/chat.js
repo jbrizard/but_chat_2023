@@ -49,7 +49,6 @@ function sendMessage()
 	message = boldRedMessage(message);
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
-	socket.emit('point', message);
 }
 
 /**

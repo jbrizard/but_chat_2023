@@ -41,7 +41,7 @@ io.sockets.on('connection', function(socket)
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
 	});
-	console.log(socket.name,'dehors fct');
+	
 	// Réception d'un message
 	socket.on('message', function(message)
 	{
@@ -49,6 +49,7 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 		//module
 		message = point.replaceTag(message);
+
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
 		
