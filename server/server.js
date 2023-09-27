@@ -59,7 +59,6 @@ io.sockets.on('connection', function(socket)
 		io.sockets.emit('disconnected', socket.id);
 	});
 
-	----------------------------------------------------
 	// Réception d'un message
 	socket.on('message', function(message)
 	{

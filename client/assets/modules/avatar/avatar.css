@@ -47,11 +47,11 @@
     z-index: 1;
 }
 
-input {
+.avatar-edit input {
     display: none;
 }
 
-input+label {
+.avatar-edit input+label {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -64,12 +64,12 @@ input+label {
     transition: all .2s ease-in-out;
 }
 
-input+label:hover {
+.avatar-edit input+label:hover {
     background: #f1f1f1;
     border-color: #d6d6d6;
 }
 
-input+label:hover::after {
+.avatar-edit input+label:hover::after {
     content: "🖊️";
     position: absolute;
     top: 50%;
