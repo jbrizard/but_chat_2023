@@ -19,19 +19,16 @@ function handleNewConnection(socket, io)
     var score = 0;
     console.log('zqgrqg,lqlg,rq');
     
-    socket.on('point', function(pointCheck)
+    socket.on('point', function(data)
         {
             console.log('test');
-            if (pointCheck==true) {
-                score +=10;
+            
+                score +=data;
                     console.log(score);
                     socket.emit('point_view', 
                     {
                         score:score
                     });
-            }      
-            
-
             
         });	
 }
