@@ -1,4 +1,9 @@
-﻿html, body {
+﻿@import './modules/connected/connected.css';
+@import './modules/feedback/feedback.css';
+@import './modules/daffy/daffy.css';
+@import './modules/identification/identification.css';
+
+html, body {
 	height:100%;
 	margin:0;
 	padding:0;
@@ -181,13 +186,14 @@ h1 {
 	font-weight:bold;
 }
 #messages .message .user:after {
-	content:': ';
+	content:' : ';
 }
 #help {
         position:absolute;
         right:10px;
         top:10px;
 }
+
 #help-toggle {
         width:30px;
         height:30px;
@@ -200,6 +206,7 @@ h1 {
         border-radius:50%;
         cursor:pointer;
 }
+
 #help-content {
         display:none;
         position: absolute;
@@ -215,6 +222,15 @@ h1 {
         box-shadow: 2px 2px 6px rgba(0, 0, 0, .2);
         border-radius: 3px;
 }
+
 .hidden{
 	display: none !important;
+}
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
 }

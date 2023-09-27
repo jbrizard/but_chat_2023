@@ -1,0 +1,21 @@
+.welcomeUser {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px;
+}
+
+.welcomeUser:nth-child(2n) {
+	background:rgba(0, 0, 0, .02);
+}
+
+.welcomeUser > span {
+    font-style: italic;
+}
+
+.welcomeUser .date {
+    font-style: italic;
+    font-size: 10px;
+}
