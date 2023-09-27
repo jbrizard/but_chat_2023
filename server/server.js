@@ -69,7 +69,7 @@ io.sockets.on('connection', function(socket)
 
 	socket.on('search_gif', function(search_term)
 	{
-		gifAPI.handleSearch(io, socket, search_term);
+		gifAPI.handleSearch(socket, search_term);
 	});
 
 	socket.on('send_gif', function(data)

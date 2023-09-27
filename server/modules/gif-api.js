@@ -15,7 +15,7 @@ const request = require('request');
  * Fonction de recherche de gif correspondant au terme de recherche
  * Qui utilise l'API de tenor
  */
-function handleSearch(io, socket, search_term){
+function handleSearch(socket, search_term){
     // enregistrement de clé API (publique que tout le monde utilise)
     let apikey = "LIVDSRZULELA";
     // Limite de résultats
@@ -25,7 +25,7 @@ function handleSearch(io, socket, search_term){
 
     // Envoi de la requette et emition des résultats vers l'utilisateur
     request(url, function (error, response, body) {
-        io.sockets.emit('search_gif_result', JSON.parse(body));
+        socket.emit('search_gif_result', JSON.parse(body));
     });
 
 }
