@@ -1,10 +1,9 @@
-	socket.on('new_survey', receiveSurvey);
+socket.on('new_survey', receiveSurvey);
 socket.on('new_time', receiveTime);
 socket.on('new_count', receiveCount);
 socket.on('new_winner', receiveWinner);
 
 $('#button-survey').click(formSurvey);
-
 
 /**
  * Envoie d'un sondage au serveur

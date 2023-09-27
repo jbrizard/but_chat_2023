@@ -37,17 +37,18 @@ function sendMessage()
 	var input = $('#message-input');
 	var message = input.val();	
 	
-	sendPoint(message);
 	input.val('');
 	
 	// On n'envoie pas un message vide
 	if (message == '')
 		return;
+
 	console.log(message);
 	
 	message = hilightMessage(message);
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
+	socket.emit('point', message);
 }
 
 /**
