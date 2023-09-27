@@ -36,14 +36,14 @@ function addAvatar(io, socket, avatar, callback)
 		{
 			callback({ message: err ? "failure : " + err : "success" });
 			if (err) {
-				socket.avatar = "./modules/avatar/defaultAvatar.png";
+				socket.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU";
 			}
 		});
 		socket.avatar = "./tmp/upload/" + fileName;
 	}
 	else 
 	{
-		socket.avatar = "./modules/avatar/defaultAvatar.png";
+		socket.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU";
 	}
 	// Suppression de l'ancienne image
 	if (previousAvatar != socket.avatar && previousAvatar != undefined) 

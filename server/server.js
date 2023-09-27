@@ -37,7 +37,7 @@ io.sockets.on('connection', function(socket)
 	{
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
-		socket.avatar = './modules/avatar/defaultAvatar.png';
+		socket.avatar = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU';
 
 		connected.connected(io,io.sockets.sockets);
 	});
