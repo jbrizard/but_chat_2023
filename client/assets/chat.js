@@ -44,7 +44,7 @@ function sendMessage()
 	// On n'envoie pas un message vide
 	if (message == '')
 		return;
-	
+	if(message.includes("/clear")){ document.querySelector("#chat #messages").innerHTML =""; return;} //TODO remove for finnal fusion
 	// Envoi le message au serveur pour broadcast
 	socket.emit('message', message);
 

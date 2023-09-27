@@ -1,0 +1,73 @@
+/* Module Basket */
+.ball {
+	border-radius:50%;
+	width:80px;
+	height:80px;
+	position:absolute;
+	top:100px;
+	left:50%;
+	background:url('ball.png') no-repeat;
+	background-size:contain;
+	transform-origin:center;
+	z-index:2;
+	display:none;
+}
+#basket-net {
+	position:absolute;
+	top:300px;
+	right:0;
+	width:150px;
+	height:150px;
+}
+#basket-net #back,
+#basket-net #front {
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+#basket-net #back {
+	background:url('basket-net-back.png') no-repeat;
+	background-size:contain;
+	z-index:0;
+}
+#basket-net #front {
+	background:url('basket-net-front.png') no-repeat;
+	background-size:contain;
+	z-index:2;
+}
+#others-mouse-pos {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	z-index:1;
+	pointer-events:none;
+}
+#others-mouse-pos > .mouse-pos {
+	position:absolute;
+	width:20px;
+	height:20px;
+	transform:translateX(-50%) translateY(-50%);
+	border-radius:50%;
+}
+#basket-scores {
+	position: absolute;
+    right: 0;
+    top: 100px;
+    text-align: right;
+    padding: 5px 10px;
+    background: #bc663c;
+    font-size: 12px;
+    line-height: 2;
+	font-weight:bold;
+	display:none;
+}
+.basket-score {
+	position:absolute;
+	font-size:60px;
+	color:#bc663c;
+	font-weight:bold;
+}
