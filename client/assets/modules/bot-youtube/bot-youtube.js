@@ -13,11 +13,15 @@ $('#message-youtube').keyup(function(evt)
 	searchOnYoutube();
 });
 
+//définition des token (null si non définis)
+let nextPageToken = null;
+let prevPageToken = null;
+
 // Gestion des événements diffusés par le serveur
 socket.on('new_youtubeSearch', receiveSearchYoutube);
 
 // Action quand on clique sur le bouton "Envoyer"
-$('#send-youtube').click(searchOnYoutube);
+document.querySelector('#send-youtube').addEventListener("click", () => searchOnYoutube(null))
 
 //Envoyer la video sur le chat au click
 $(document).on('click', '.result-youtube', displayYoutube);
@@ -46,36 +50,48 @@ function emptyYoutubeResults()
  */
 function receiveSearchYoutube(data) 
 {
-  console.log('Requete Youtube reçue');
-  var resultElement = $(
-    '<div class="result-youtube" videoid="' + data.youtubeId + '">' +
-    data.youtubeThumbnail +
-    data.youtubeTitle +
-    '</div>'
-  );
-  
-  nextPageToken = $(data.youtubeNextPageToken);
-  prevPageToken = $(data.youtubePrevPageToken);
-  console.log(nextPageToken, prevPageToken);
-  $('#youtube-results').append(resultElement);
 
+  data.items.forEach((video) => {
+    let resultElement = $(
+      '<div class="result-youtube" videoid="' + video.id.videoId + '">' +
+      `<img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.thumbnails.default.url}" class="youtube-thumbnail">` +
+      `<span>${video.snippet.title}</span>` +
+      '</div>'
+    );
+
+    $('#youtube-results').append(resultElement);
+  });
+
+  if(data.nextPageToken != undefined){
+    nextPageToken = data.nextPageToken;
+  }else{
+    nextPageToken = null;
+  }
+
+  if(data.prevPageToken != undefined){
+    prevPageToken = data.prevPageToken;
+  }else{
+    prevPageToken = null;
+  }
+  
 };
 
 /**
  * Envoie de la recherche youtube au serveur
  */
-function searchOnYoutube(token) 
+function searchOnYoutube(pageToken) 
 {
   // Récupère le message, puis vide le champ texte
-  var input = $('#message-youtube');
-  var searchYoutube = input.val();
+  let input = document.querySelector("#message-youtube");
+  let searchYoutube = input.value;
 
   // On n'envoie pas un message vide
   if (searchYoutube == '') return;
   emptyYoutubeResults();
   console.log('Lancement de la recherche sur Youtube (front)');
+
   // Envoi le message au serveur pour broadcast
-  socket.emit('youtubeSearch',searchYoutube, token);
+  socket.emit('youtubeSearch', searchYoutube, pageToken);
 }
 
 

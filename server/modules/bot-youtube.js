@@ -21,18 +21,12 @@ youTube.setKey('AIzaSyCvhVH3bWqHvUE2MILcejO2NRY-7NcHigg');
 /**
  * Le bot renvoie une vidéo youtube basé sur ce que l'utilisateur rentre
  */
-function handleYoutube(io, youtubeSearch, token) 
+function handleYoutube(io, youtubeSearch, pageToken) 
 {
-    youTube.search(youtubeSearch, 2, function(error, result) {
+  console.log(pageToken);
+
+    youTube.search(youtubeSearch, 2, {pageToken: pageToken}, function(error, result) {
       // Emit a message with the YouTube video data
-      result.items.forEach(video => {
-        io.sockets.emit('new_youtubeSearch', {
-            youtubeThumbnail: `<img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.thumbnails.default.url}" class="youtube-thumbnail">`,
-            youtubeTitle: `<span>${video.snippet.title}</span>`,
-            youtubeId: video.id.videoId,
-            youtubeNextPageToken: result.nextPageToken,
-            youtubePrevPageToken: result.previousPageToken
-        });
-      });
+      io.sockets.emit('new_youtubeSearch', result);
     });
 };

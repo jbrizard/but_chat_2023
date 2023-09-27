@@ -9,7 +9,7 @@ var fs = require('fs');			// Accès au système de fichier
 // Chargement des modules perso
 var daffy = require('./modules/daffy.js');
 var youtubeBot = require('./modules/bot-youtube.js');
-const { youtube } = require('googleapis/build/src/apis/youtube/index.js');
+// const { youtube } = require('googleapis/build/src/apis/youtube/index.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -52,12 +52,11 @@ io.sockets.on('connection', function(socket)
 	});
 
 	// Réception d'une recherche youtube
-	socket.on('youtubeSearch', function(youtubeSearch, token) {
+	socket.on('youtubeSearch', function(youtubeSearch, pageToken) {
 		// Par sécurité, on encode les caractères spéciaux
 		youtubeSearch = ent.encode(youtubeSearch);
-		console.log('text2')
 		// Transmet le message au bot Youtube (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
-		youtubeBot.handleYoutube(io, youtubeSearch, token);
+		youtubeBot.handleYoutube(io, youtubeSearch, pageToken);
 	});
 
 	//Reception de l'envoie de vidéo sur le chat
