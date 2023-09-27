@@ -1,4 +1,3 @@
-var socket = io.connect(':8090');
 socket.on('point_view', pointView);
 
 var pointCheck = [false, false, false, false, false];

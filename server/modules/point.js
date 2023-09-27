@@ -19,9 +19,9 @@ function handleNewConnection(socket, io)
     var score = 0;
     console.log('zqgrqg,lqlg,rq');
     
-    socket.on('point', function(pointCheck)
+    socket.on('point', function(pointCheck, papa)
         {
-            console.log('test');
+            console.log(papa);
             if (pointCheck==true) {
                 score +=10;
                     console.log(score);

@@ -41,7 +41,7 @@ io.sockets.on('connection', function(socket)
 		// Stocke le nom de l'utilisateur dans l'objet socket
 		socket.name = name;
 	});
-	
+	console.log(socket.name,'dehors fct');
 	// Réception d'un message
 	socket.on('message', function(message)
 	{

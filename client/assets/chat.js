@@ -5,6 +5,8 @@ var socket = io.connect(':8090');
 // Demande un pseudo et envoie l'info au serveur
 var name = prompt('Quel est votre pseudo ?');
 socket.emit('user_enter', name);
+console.log(name, 'ffff');
+
 
 // Gestion des événements diffusés par le serveur
 socket.on('new_message', receiveMessage);
@@ -41,6 +43,7 @@ function sendMessage()
 	// On n'envoie pas un message vide
 	if (message == '')
 		return;
+	console.log(message);
 	
 	message = hilightMessage(message);
 	// Envoi le message au serveur pour broadcast
