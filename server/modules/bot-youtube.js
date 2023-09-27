@@ -1,6 +1,6 @@
 /*
  * Nom : Bot Youtube
- * Description : Ce module donne une vidéo youtube lorsque que l'on appelle avec /youtube [video youtube]
+ * Description : Ce module donne une liste de vidéo youtube
  * Auteur : Adrien
  */
 
@@ -16,17 +16,16 @@ var YouTube = require('youtube-node');
 var youTube = new YouTube();
 
 // Entre la clé unique pour utiliser l'API Youtube
-youTube.setKey('AIzaSyBN4CNwzsPtgAn80Nyn5wEjbzYFh-JIdho');
+youTube.setKey('AIzaSyCjib9mUkUShJER6vXn95SevYIxKFOfwbI');
 
 /**
  * Le bot renvoie une vidéo youtube basé sur ce que l'utilisateur rentre
  */
-function handleYoutube(io, youtubeSearch, pageToken) 
+function handleYoutube(socket, youtubeSearch, pageToken) 
 {
-  console.log(pageToken);
-
-    youTube.search(youtubeSearch, 2, {pageToken: pageToken}, function(error, result) {
-      // Emit a message with the YouTube video data
-      io.sockets.emit('new_youtubeSearch', result);
+    youTube.search(youtubeSearch, 3, {pageToken: pageToken}, function(error, result) 
+    {
+      //Envoyer la vidéo Youtube
+      socket.emit('new_youtubeSearch', result);
     });
 };

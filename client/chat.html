@@ -24,15 +24,19 @@
 					<input type="text" id="message-input" />
 					
 					<input type="button" id="send-message" value="Envoyer" />
-                    <input type="button" id="open-youtube" value="Youtube" />
+                    <button id="open-youtube" value="Youtube"> <img src="../modules/bot-youtube/youtube.png" alt="Logo_Youtube"></button>
 			</div>
         </div>
-        <div id="bot-youtube" class="hidden">
-            <input type="text" id="message-youtube" />
-            <input type="button" id="send-youtube" value="Envoyer" />
+        <div id="bot-youtube" class="hiddenYoutube">
+            <div id="sendAndSearchYoutube">
+                <input type="text" id="message-youtube" />
+                <input type="button" id="send-youtube" value="Rechercher" />
+            </div>
             <div id="youtube-results"></div>
-            <button id="prevButton">Previous</button>
-            <button id="nextButton">Next</button>
+            <div id="buttonYoutubePrevNext">
+                <button id="prevButtonYoutube" class="disableYoutube"><</button>
+                <button id="nextButtonYoutube">></button>
+            </div>
          </div>
          
          

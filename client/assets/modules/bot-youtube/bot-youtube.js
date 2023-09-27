@@ -2,13 +2,12 @@
 var openMenuButton = document.getElementById('open-youtube');
 var menu = document.getElementById('bot-youtube');
 openMenuButton.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
+    menu.classList.toggle('hiddenYoutube');
 });
 
 // Action quand on appuye sur la touche [Entrée] dans le champ de message (= comme Envoyer)
 $('#message-youtube').keyup(function(evt)
 {
-	console.log('keyup')
 	if (evt.keyCode == 13) // 13 = touche Entrée
 	searchOnYoutube();
 });
@@ -27,25 +26,33 @@ document.querySelector('#send-youtube').addEventListener("click", () => searchOn
 $(document).on('click', '.result-youtube', displayYoutube);
 
 // Ecouter le clic du bouton Suivant
-$('#nextButton').click(function () 
+$('#nextButtonYoutube').click(function () 
 {
   searchOnYoutube(nextPageToken);
 });
 
 // Ecouter le clic du bouton Précédent 
-$('#prevButton').click(function () 
+$('#prevButtonYoutube').click(function () 
 {
-  searchOnYoutube(prevPageToken);
+  
+  if(prevPageToken === null) 
+  {
+    $('#prevButtonYoutube').addClass('disableYoutube');
+  } else 
+  {
+    $('#prevButtonYoutube').removeClass('disableYoutube');
+    searchOnYoutube(prevPageToken);
+  }
 });
 
 /**
- * Affichage de la vidéo youtube dans le chat
+ * Affichage de la vidéo youtube dans le chat et ferme le menu
  */
 function displayYoutube() 
 {
-  console.log("Clicked on video: ");
   var videoId = $(this).attr("videoid");
   socket.emit('sendVideo', videoId);
+  menu.classList.toggle('hiddenYoutube');
 }
 
 /**
@@ -53,7 +60,6 @@ function displayYoutube()
  */
 function emptyYoutubeResults() 
 {
-  console.log('Vidage des résultats')
   $('#youtube-results').empty(); 
 }
 
@@ -65,9 +71,10 @@ function receiveSearchYoutube(data)
   //Pour chaque video, ajouté une miniature et le titre
   data.items.forEach((video) => 
   {
+    console.log(video);
     let resultElement = $(
       '<div class="result-youtube" videoid="' + video.id.videoId + '">' +
-      `<img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.thumbnails.default.url}" class="youtube-thumbnail">` +
+      `<img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.thumbnails.medium.url}" class="youtube-thumbnail">` +
       `<span>${video.snippet.title}</span>` +
       '</div>'
     );
@@ -87,13 +94,13 @@ function receiveSearchYoutube(data)
 
   if(data.prevPageToken != undefined)
   {
+    $('#prevButtonYoutube').removeClass('disableYoutube');
     prevPageToken = data.prevPageToken;
   }
   else
   {
     prevPageToken = null;
   }
-  
 };
 
 /**
@@ -110,8 +117,6 @@ function searchOnYoutube(pageToken)
 
   //Vide les résultats
   emptyYoutubeResults();
-
-  console.log('Lancement de la recherche sur Youtube (front)');
 
   // Envoi le message au serveur pour broadcast
   socket.emit('youtubeSearch', searchYoutube, pageToken);

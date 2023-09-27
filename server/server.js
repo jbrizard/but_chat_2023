@@ -52,11 +52,13 @@ io.sockets.on('connection', function(socket)
 	});
 
 	// Réception d'une recherche youtube
-	socket.on('youtubeSearch', function(youtubeSearch, pageToken) {
+	socket.on('youtubeSearch', function(youtubeSearch, pageToken) 
+	{
 		// Par sécurité, on encode les caractères spéciaux
 		youtubeSearch = ent.encode(youtubeSearch);
+		
 		// Transmet le message au bot Youtube (on lui passe aussi l'objet "io" pour qu'il puisse envoyer des messages)
-		youtubeBot.handleYoutube(io, youtubeSearch, pageToken);
+		youtubeBot.handleYoutube(socket, youtubeSearch, pageToken);
 	});
 
 	//Reception de l'envoie de vidéo sur le chat
