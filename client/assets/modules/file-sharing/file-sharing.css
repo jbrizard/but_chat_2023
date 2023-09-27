@@ -1,0 +1,17 @@
+/* lien fonctionnel */
+/* #file-input{
+    
+} */
+
+.message :is(img, video, audio, object){
+    max-width: 100%;
+}
+
+.message :is(video, audio, object){
+    width: 100%;
+}
+
+.message object{
+    height: 300px;
+}
+

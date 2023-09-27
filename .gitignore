@@ -1,3 +1,4 @@
 .vscode
 server/node_modules/*
-!server/node_modules/readme.txt
+client/assets/uploads/*
+!client/assets/uploads/.gitkeep

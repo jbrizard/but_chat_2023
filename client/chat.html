@@ -7,25 +7,72 @@
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script> <!-- fichier injecté par NodeJS -->
         <script src="/modules/bot-youtube/bot-youtube.js" defer></script>
+
         <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="/modules/avatar/avatar.css" />
         <link rel="stylesheet" href="/modules/daffy/daffy.css" />
+
         <link rel="stylesheet" href="/modules/bot-youtube/bot-youtube.css" />
+        <link rel="stylesheet" href="/modules/file-sharing/file-sharing.css" />
+        <link rel="stylesheet" href="modules/pendu/pendu.css" />
+        <link rel="stylesheet" href="/modules/basket/basket.css" />
+        <link rel="stylesheet" href="/modules/gif-api/gif-api.css" />
+
+        <link rel="stylesheet" href="/modules/history/history.css" />
+        <link rel="stylesheet" href="/modules/editMessage/editMessage.css" />
     </head>
     
     <body>
         <h1>Le Chat !</h1>
         
         <div id="chat">
-            <div id="messages">
-                
+            <div id="messages"></div>
+			<div id="feedback">
+                <p></p>
             </div>
-			
 			<div id="tools">
+
+                    <input type="button" id="start-game" value="🎮">    
+
 					<input type="text" id="message-input" />
-					
 					<input type="button" id="send-message" value="Envoyer" />
+
+
+					<input type="button" id="open-recording" value="🎙️" />
+
+                    <div id="record-box">
+                        <button id="startRecording">Start</button>
+                        <button id="stopRecording">Stop</button>
+                        <button id="sendRecord">Envoyer</button>
+                        <!-- <audio src="" id="audioElement" controls></audio> -->
+                    </div>
+
+                    <div id="game-box" class="hidden">
+                        <div id="game-selection">
+                            <button class="game-icone" id="pendu-icone">Pendu</button>
+                        </div>
+                        <div id="pendu-menu" class="hidden">
+                            <button class="yes">Je choisi le mot</button>
+                            <button class="api">Mot aléatoire</button>
+                            <button class="stop">Annuler</button>
+                        </div>
+                    </div>
                     <button id="open-youtube" value="Youtube"> <img src="../modules/bot-youtube/youtube.png" alt="Logo_Youtube"></button>
-			</div>
+                    <button id="send-gif">Send gif</button>
+        
+                    <input type="file" id="file-input" accept=".mp3, .pdf, .rar, .zip, .mp4, .jpg, .png, .gif">
+		</div>
+        </div>
+
+        <div id="gif-panel">
+            <div id="search">
+                <input type="text" placeholder="Search your gif">
+                <button>?</button>
+            </div>
+            <div id="results">
+                <div></div>
+                <div></div>
+            </div>
         </div>
         <div id="bot-youtube" class="hiddenYoutube">
             <div id="sendAndSearchYoutube">
@@ -43,12 +90,55 @@
 		<div id="help">
 				<div id="help-toggle">?</div>
 				<ul id="help-content">
+
 						<li>
-								<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
+							<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
 						</li>
+                        <li>
+                            <strong>Module Partage de fichier</strong> : partager vos fichier en toute liberté ! ("file-sharing")
+                        </li>
+                        <li>
+                            <strong>Module Gif</strong> : envoyer les gif de vos choix grace au menu "Send gif" ("gif-api")
+                        </li>
+                        <li>
+                            <strong>Module Blagues</strong> : découvrer des blagues hilarantes avec la commande "/blague" - ("bot-blague")
+                        </li>
 				</ul>
 		</div>
+
+        <div class="avatar-upload">
+            <div class="avatar-edit">
+                <input onchange="upload(this.files)" type="file" id="add-avatar" accept=".png, .jpg, .jpeg .gif" />
+                <label for="add-avatar"></label>
+            </div>
+            <div class="avatar-preview">
+                <div id="imagePreview">
+                </div>
+            </div>
+        </div>
 		
+        <div id="connected">
+            <div id="connected-toggle">
+                <svg fill="#fff" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M735.385 336.094c218.24 0 395.977 177.624 395.977 395.976v113.137c0 121.96-56.568 229.78-143.57 302.526 94.13 13.916 187.354 34.959 278.315 64.6 122.414 39.825 204.664 155.676 204.664 288.159v200.364l-26.814 16.63c-148.434 92.32-392.017 202.515-708.572 202.515-174.795 0-439.76-35.186-708.685-202.514L0 1700.856v-189.39c0-140.629 89.264-263.042 221.973-304.79 85.418-26.7 172.533-46.498 260.327-59.509-86.55-72.746-142.891-180.339-142.891-301.96V732.07c0-218.352 177.623-395.976 395.976-395.976ZM1183.405 0c218.24 0 395.976 177.624 395.976 395.977v113.136c0 121.96-56.568 229.893-143.57 302.526 94.13 13.916 187.241 35.072 278.316 64.6 122.413 40.051 204.663 155.79 204.663 288.272v200.364l-26.7 16.631c-77.612 48.31-181.81 101.03-308.183 140.742v-21.723c0-181.696-113.589-340.766-282.727-395.75a1720.133 1720.133 0 0 0-111.553-32.244c35.751-69.805 54.871-147.416 54.871-227.29V732.104c0-250.483-182.036-457.975-420.414-500.175C886.762 95.487 1023.656 0 1183.404 0Z" fill-rule="evenodd"/>
+                </svg>
+            </div>
+            <ul id="connected-content"></ul>
+        </div>
+		
+
         <script type="text/javascript" src="chat.js"></script>
+        <script type="text/javascript" src="/modules/gif-api/gif-api.js"></script>
+        <script type="text/javascript" src="/modules/file-sharing/file-sending.js"></script>
+
+        <script type="text/javascript" src="/modules/feedback/feedbackClient.js"></script>
+        <script type="text/javascript" src="/modules/connected/connectedClient.js"></script>
+        <script type="text/javascript" src="/modules/identification/identificationClient.js"></script>
+        <script type="text/javascript" src="/modules/avatar/avatar.js"></script>
+		
+        <script type="text/javascript" src="modules/basket/basket.js"></script>
+        <script type="text/javascript" src="/modules/history/history.js"></script>
+        <script type="text/javascript" src="/modules/editMessage/editMessage.js"></script>
+        <script type="text/javascript" src="modules/vocaux/vocaux.js" ></script>
     </body>
 </html>
