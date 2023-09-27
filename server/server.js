@@ -71,8 +71,9 @@ io.sockets.on('connection', function(socket)
 	socket.on('send_gif', function(data)
 	{
 		gifAPI.handleGif(io, {name: socket.name, data: data});
-
-  socket.on('send_file', function(props)
+	});
+	
+  	socket.on('send_file', function(props)
 	{
 		fileSharing.handleFile(io, socket.name, props);
 	});
