@@ -1,5 +1,3 @@
 .vscode
 server/node_modules/*
 !server/node_modules/readme.txt
-server/package.json
-server/package-lock.json
