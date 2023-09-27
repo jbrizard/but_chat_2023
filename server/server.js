@@ -10,6 +10,7 @@ var fs = require('fs');			// Accès au système de fichier
 var daffy = require('./modules/daffy.js');
 var fileSharing = require('./modules/file-sharing.js');
 var basket = require('./modules/basket.js');
+var gifAPI = require('./modules/gif-api.js');
 
 // Initialisation du serveur HTTP
 var app = express();
@@ -62,7 +63,16 @@ io.sockets.on('connection', function(socket)
 		basket.onMessage(io, message);
 	});
 
-	socket.on('send_file', function(props)
+	socket.on('search_gif', function(search_term)
+	{
+		gifAPI.handleSearch(io, socket, search_term);
+	});
+
+	socket.on('send_gif', function(data)
+	{
+		gifAPI.handleGif(io, {name: socket.name, data: data});
+
+  socket.on('send_file', function(props)
 	{
 		fileSharing.handleFile(io, socket.name, props);
 	});
