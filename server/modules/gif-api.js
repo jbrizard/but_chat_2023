@@ -13,19 +13,26 @@ const request = require('request');
 
 /**
  * Fonction de recherche de gif correspondant au terme de recherche
+ * Qui utilise l'API de tenor
  */
 function handleSearch(io, socket, search_term){
+    // enregistrement de clé API (publique que tout le monde utilise)
     let apikey = "LIVDSRZULELA";
+    // Limite de résultats
     let lmt = 12;
-
+    // URL de requette API
     let url = `https://g.tenor.com/v1/search?q=${search_term}&key=${apikey}&limit=${lmt}`
 
+    // Envoi de la requette et emition des résultats vers l'utilisateur
     request(url, function (error, response, body) {
         io.sockets.emit('search_gif_result', JSON.parse(body));
     });
 
 }
 
+/**
+ * Envoi des gif au autres utilisateurs
+ */
 function handleGif(io, data){
     io.sockets.emit('receive_gif', data);
 }
