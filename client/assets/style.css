@@ -2,6 +2,7 @@
 @import './modules/feedback/feedback.css';
 @import './modules/daffy/daffy.css';
 @import './modules/identification/identification.css';
+@import './modules/mp/mp.css';
 
 html, body {
 	height:100%;

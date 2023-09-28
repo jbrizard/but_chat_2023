@@ -12,6 +12,7 @@ var feedback  = require('./modules/feedback.js');
 var connected  = require('./modules/connected.js');
 var avatar = require('./modules/avatar.js');
 var identification = require('./modules/identification.js');
+var mp = require('./modules/mp.js');
 
 // Initialisation du serveur HTTP
 var app = express();
