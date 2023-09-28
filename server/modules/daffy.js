@@ -6,13 +6,13 @@
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
 module.exports =  {
-	handleDaffy: handleDaffy // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+	onMessage: onMessage // permet d'appeler cette méthode dans server.js -> daffy.onMessage(...)
 }
 
 /**
  * Lorsqu'on appelle Daffy, il répond...
  */
-function handleDaffy(io, message)
+function onMessage(io, message)
 {
 	// Passe le message en minuscules (recherche insensible à la casse)
 	message = message.toLowerCase();

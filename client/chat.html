@@ -9,6 +9,11 @@
         
         <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="/modules/avatar/avatar.css" />
+        <link rel="stylesheet" href="/modules/daffy/daffy.css" />
+        <link rel="stylesheet" href="/modules/file-sharing/file-sharing.css" />
+        <link rel="stylesheet" href="/modules/basket/basket.css" />
+        <link rel="stylesheet" href="/modules/gif-api/gif-api.css" />
+
     </head>
     
     <body>
@@ -20,17 +25,41 @@
                 <p></p>
             </div>
 			<div id="tools">
-				<input type="text" id="message-input" />
-				<input type="button" id="send-message" value="Envoyer" />
+
+					<input type="text" id="message-input" />
+					<input type="button" id="send-message" value="Envoyer" />
+                    <button id="send-gif">Send gif</button>
+                    <input type="file" id="file-input" accept=".mp3, .pdf, .rar, .zip, .mp4, .jpg, .png, .gif">
 			</div>
+        </div>
+
+        <div id="gif-panel">
+            <div id="search">
+                <input type="text" placeholder="Search your gif">
+                <button>?</button>
+            </div>
+            <div id="results">
+                <div></div>
+                <div></div>
+            </div>
         </div>
         
 		<div id="help">
 				<div id="help-toggle">?</div>
 				<ul id="help-content">
-					<li>
-						<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
-					</li>
+
+						<li>
+							<strong>Module Daffy</strong> : il accourt quand on l'appelle ! ("Daffy")
+						</li>
+                        <li>
+                            <strong>Module Partage de fichier</strong> : partager vos fichier en toute liberté ! ("file-sharing")
+                        </li>
+                        <li>
+                            <strong>Module Gif</strong> : envoyer les gif de vos choix grace au menu "Send gif" ("gif-api")
+                        </li>
+                        <li>
+                            <strong>Module Blagues</strong> : découvrer des blagues hilarantes avec la commande "/blague" - ("bot-blague")
+                        </li>
 				</ul>
 		</div>
 
@@ -54,11 +83,15 @@
             <ul id="connected-content"></ul>
         </div>
 		
-        <script type="text/javascript" src="/chat.js"></script>
+
+        <script type="text/javascript" src="chat.js"></script>
+        <script type="text/javascript" src="/modules/gif-api/gif-api.js"></script>
+        <script type="text/javascript" src="/modules/file-sharing/file-sending.js"></script>
         <script type="text/javascript" src="/modules/feedback/feedbackClient.js"></script>
         <script type="text/javascript" src="/modules/connected/connectedClient.js"></script>
         <script type="text/javascript" src="/modules/identification/identificationClient.js"></script>
         <script type="text/javascript" src="/modules/avatar/avatar.js"></script>
         <script type="text/javascript" src="/modules/mp/mpClient.js"></script>
+        <script type="text/javascript" src="modules/basket/basket.js"></script>
     </body>
 </html>
