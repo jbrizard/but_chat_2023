@@ -74,13 +74,21 @@ function sendGif(data)
 /**
  * Affiche les gif envoyé par les autres utilisateurs
  */
-function receivingGif(infos)
+function receivingGif(data)
 {
   $('#chat #messages').append(
-		'<div class="message">'
-			+ '<span class="user">' + infos.name  + '</span> ' 
-			+ `<img src="${infos.data.media[0].mediumgif.url}" alt="${infos.data.content_description}">`
+		'<div id="' + data.idMessage + '" class="message message-' + data.socketId + '">'
+			+ `<img class='avatar ${data.socketId}' src="${ data.avatar ? data.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTR3zZjipG0-Lf-MtJcieX_ASoCDA_6JfGxA&usqp=CAU" }"  />`
+			+ '<div class="message-container">'
+			+ '<div class="headerMessage">'
+			+ '<span class="user">' + data.name  + '</span> ' 
+			+ '<span class="messageDate">' + data.date  + '</span> '
+			+ '</div>'
+			+ `<img src="${data.data.media[0].mediumgif.url}" alt="${data.data.content_description}">`
+			+ '</div>'
 	     + '</div>'
-	)
-	.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+	).scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
+
+
+	
 }

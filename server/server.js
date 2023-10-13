@@ -162,19 +162,30 @@ io.sockets.on('connection', function(socket)
 
 	socket.on('send_gif', function(data)
 	{
-		gifAPI.handleGif(io, {name: socket.name, data: data});
+		// Date
+		const date = Date.now();
+		// ID du message
+		const idMessage = socket.id + date;
+		
+		// Gestion de l'envoi de gif
+		gifAPI.handleGif(io, {name: socket.name,socketId: socket.id, avatar: socket.avatar, idMessage: idMessage, date: moment(date).locale('fr').calendar(), data: data});
 	});
 	
   	socket.on('send_file', function(props)
 	{
-		fileSharing.handleFile(io, socket.name, props);
+		// Date
+		const date = Date.now();
+		// ID du message
+		const idMessage = socket.id + date;
+
+		// Gestion de l'envoi de fichier
+		fileSharing.handleFile(io, socket.name, props,  socket.avatar, moment(date).locale('fr').calendar());
 	});
 	// Modification d'un message
 	socket.on('submit_edited_message', (data) => 
 	{
 		editMessage.editMessage(io, socket, data, messageHistory);
-	}
-	)
+	})
 });
 
 
