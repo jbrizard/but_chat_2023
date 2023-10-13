@@ -37,8 +37,6 @@ function handlePendu(io, word)
 	// Passe le message en minuscules (recherche insensible à la casse)
 	mysteryWord =word.toLowerCase();
     
-	console.log(mysteryWord);
-
 
     {
        //Masque le mot avec des _ séparés d'un espace
@@ -56,31 +54,30 @@ function handlePendu(io, word)
 
 function handleReponse(io, reponse)
 {
+    let response = reponse.toLowerCase();
     if(startGame)
     {
        
         hiddenWord='';
-        console.log(reponse, 'type :', typeof reponse, 'longueur', reponse.length);
-        if (reponse.length>1 || reponse.length==0)
+        if (response.length>1 || response.length==0)
         {
             sendBotMessage(io,'Il faut écrire une seule lettre');   //On verifie si le message contient bien une seule lettre
         }
         else
         {
-            if(allLetters.includes(reponse))
+            if(allLetters.includes(response))
             {
                 sendBotMessage(io,'Vous avez déjà essayé cette lettre') //Ensuite on verfiei que la lettre n'a pas déjà été proposée
             }
             else
             {
             
-                allLetters.push(reponse);    
-                console.log(mysteryWord);
+                allLetters.push(response);    
         
                 //On regarde si la lettre est présente dans le mot
-                if (mysteryWord.includes(reponse))
+                if (mysteryWord.includes(response))
                 {
-                    foundLetters.push(reponse);
+                    foundLetters.push(response);
                 }
                 else
                 {
