@@ -179,8 +179,9 @@ io.sockets.on('connection', function(socket)
 		const idMessage = socket.id + date;
 
 		// Gestion de l'envoi de fichier
-		fileSharing.handleFile(io, socket.name, props,  socket.avatar, moment(date).locale('fr').calendar());
+		fileSharing.handleFile(io, socket.name, socket.id, socket.avatar, idMessage, moment(date).locale('fr').calendar(), props);
 	});
+
 	// Modification d'un message
 	socket.on('submit_edited_message', (data) => 
 	{

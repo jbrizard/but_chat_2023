@@ -22,7 +22,7 @@ const { v4: uuidv4 } = require('uuid');
  * L'enregistre dans le dossier "/client/assets/uploads" chaque fichier ayant un hash different pour les différencier
  * Et pour finir envoie les fichier aux utilisateurs
  */
-function handleFile(io, username, props)
+function handleFile(io, username, socketId, avatar, idMessage, date , props)
 {
 	// definition de variables vides
 	let blob, format, fileId;
@@ -41,7 +41,7 @@ function handleFile(io, username, props)
 	});
 
 	// Envoi du fichier (liens vers le fichier) aux autres users
-	io.sockets.emit('file_share', {name: username, fileName: fileId+props.name, format: format});
+	io.sockets.emit('file_share', {name: username, socketId: socketId, avatar: avatar, idMessage: idMessage, date: date, fileName: fileId+props.name, format: format});
 
 
 }
