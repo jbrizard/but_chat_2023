@@ -18,6 +18,7 @@ function sendSurvey()
 	var choice2 = choice2Input.val();
 	var surveyValue = surveyInput.val();
 	var survey = {choice1, choice2, surveyValue};
+	surveyPoint = "survey"
 	surveyInput.val('');
 	choice1Input.val('');
 	choice2Input.val('');
@@ -28,9 +29,12 @@ function sendSurvey()
 	
 	// Envoi le sondage au serveur pour broadcast
 	socket.emit('survey', survey);
-	socket.emit('point', 10)
+	socket.emit('message', surveyPoint)	
 }
 
+/**
+ * Fonction de création du sondage
+ */
 function formSurvey()
 {
 	$('#tools').append(
@@ -98,7 +102,6 @@ function receiveSurvey(data)
 	var button1 = $('#surveyButton1');
 	var button2 = $('#surveyButton2');
 	
-	// 
 	button1.click(surveyClickCount);
 	button2.click(surveyClickCount);
 
@@ -137,6 +140,9 @@ function receiveCount(data)
 	voteBar(data.numVote1, data.numVote2);
 }
 
+/**
+ * Fonction gérant l'affichage du résultat du sondage en temps réel selon les valeurs de numVote1 et 2
+ */
 function voteBar(numVote1, numVote2)
 {
 	var totalVote = numVote1 + numVote2;
@@ -153,6 +159,8 @@ function receiveWinner(data)
 {
 	$('#button-survey').prop('disabled', false);	
 	$('.survey').replaceWith('');
+
+	// Si la valeur de data.winner est négative alors le résultat du sondage s'affichera dans le chat et affichera le 2e choix
 	if (data.winner < 0)
 	{
 		$('#chat #messages').append(
@@ -163,6 +171,8 @@ function receiveWinner(data)
 		)
 		.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 	}
+
+	// Si la valeur de data.winner est positive alors le résultat du sondage s'affichera dans le chat et affichera le 1er choix
 	if (data.winner > 0)
 	{
 		$('#chat #messages').append(
@@ -173,6 +183,8 @@ function receiveWinner(data)
 		)
 		.scrollTop(function(){ return this.scrollHeight });  // scrolle en bas du conteneur
 	}
+
+	// Si la valeur de data.winner est égal à 0 alors le résultat du sondage s'affichera dans le chat et affichera les deux choix
 	if (data.winner == 0)
 	{
 		$('#chat #messages').append(

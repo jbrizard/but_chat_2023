@@ -49,7 +49,8 @@ io.sockets.on('connection', function(socket)
 		message = ent.encode(message);
 		//module
 		message = point.replaceTag(message);
-
+		
+		
 		// Transmet le message à tous les utilisateurs (broadcast)
 		io.sockets.emit('new_message', {name:socket.name, message:message});
 		

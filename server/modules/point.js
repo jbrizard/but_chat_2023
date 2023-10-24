@@ -11,12 +11,15 @@ module.exports =  {
 
 function handleNewConnection(socket, io)
 {
+    // Set le score de l'utilisateur lors de sa connexion à 0
     var score = 0;
-    var pointCheck = [false, false, false, false, false];
+    // Tableau répertoriant si une condition d'obtention de point a été rempli selon son index
+    var pointCheck = [false, false, false, false, false, false];
 
     socket.on('message', function(data)
         {
-            data = data.toLowerCase();            
+            data = data.toLowerCase();                 
+            // Switch attribuant les points à l'utilisateur s'il remplit les conditions, vérifie également si la condition a déjà été complété.
             switch (true) {
                 case data === "lolo et clecle <3" && pointCheck[0] === false:
                     pointCheck[0] = true;
@@ -38,18 +41,22 @@ function handleNewConnection(socket, io)
                     pointCheck[4] = true;
                     score +=15
                     break;
+                case data === "survey" && pointCheck[5] === false:
+                    pointCheck[5] = true;
+                    score +=20
+                    break;
                 default:
                     data;
                     break;
             }
+
+            // Enleve des points à l'utilisateur si le texte contient des éléments de style
             if (data.includes("[b]"))
             {
-                // Réduisez le score de 5
                 score -= 5;
             }
             if (data.includes("[cr-b]"))
             {
-                // Réduisez le score de 5
                 score -= 5;
             }
 
@@ -60,6 +67,7 @@ function handleNewConnection(socket, io)
             {
                 socket.emit('disable_checkbox',false);
             }
+
             socket.emit('point_view', 
                 {
                     score:score
@@ -70,6 +78,9 @@ function handleNewConnection(socket, io)
         
 }
 
+/**
+ * Fonction s'occupant de styliser le text selon son contenu 
+ */
 function replaceTag(message){
     message = message.replace("[b]", "<span class='bg-c'>");
     message = message.replace("[cr-b]", "<span class='cr-b'>");
