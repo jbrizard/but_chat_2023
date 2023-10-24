@@ -53,12 +53,12 @@ function formSurvey()
  */
 function receiveTime(data)
 {
-	// Cré l'emplacement du timer
+	// Crée l'emplacement du timer
 	$('#timer').replaceWith(
 		'<p id="timer"></p>'
 	)
 	
-	// Créé la variable du timer et le rempli avec les infos du timer venant du serveur
+	// Crée la variable du timer et le rempli avec les infos du timer venant du serveur
 	const timerElement = document.getElementById("timer");
 	timerElement.innerText = `${data.minutes}:${data.secondes}`;
 	
@@ -107,7 +107,6 @@ function receiveSurvey(data)
 
 	$('#createSurvey').replaceWith('');
 	$('#button-survey').prop('disabled', true);	
-
 }
 
 /**
@@ -117,10 +116,11 @@ function surveyClickCount()
 {
 	var n;
 	var addVote = 1;
-	var counter = {addVote, n}
-	var countId = this.id
-	var pointCheck = true
+	var counter = {addVote, n};
+	var countId = this.id;
+
 	socket.emit('count', counter, countId);
+	
 	$('.surveyButtons').prop('disabled', true);
 }
 

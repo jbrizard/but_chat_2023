@@ -39,6 +39,7 @@ function boldRedMessage(message)
         $('#message-hilight').prop( "checked", false );
         message = '[cr-b]'+message+'[]';
     }
+
     return message;
 }
 
@@ -52,7 +53,8 @@ function disbaleCheckbox(data)
         $('#message-hilight').prop("disabled", true);
         $('#message-red-bold').prop( "checked", false );
         $('#message-red-bold').prop("disabled", true);
-    }else
+    }
+    else
     {
         $('#message-hilight').prop("disabled", false);
         $('#message-red-bold').prop("disabled", false);

@@ -17,62 +17,64 @@ function handleNewConnection(socket, io)
     var pointCheck = [false, false, false, false, false, false];
 
     socket.on('message', function(data)
+    {
+        data = data.toLowerCase();                 
+        // Switch attribuant les points à l'utilisateur s'il remplit les conditions, vérifie également si la condition a déjà été complété.
+        switch (true) 
         {
-            data = data.toLowerCase();                 
-            // Switch attribuant les points à l'utilisateur s'il remplit les conditions, vérifie également si la condition a déjà été complété.
-            switch (true) {
-                case data === "lolo et clecle <3" && pointCheck[0] === false:
-                    pointCheck[0] = true;
-                    score +=20
-                    break;
-                case data === "merci" && pointCheck[1] === false:
-                    pointCheck[1] = true;
-                    score +=20
-                    break;
-                case data === "bonjour" && pointCheck[2] === false:
-                    pointCheck[2] = true;
-                    score +=10
-                    break;
-                case data === "bg" && pointCheck[3] === false:
-                    pointCheck[3] = true;
-                    score +=5
-                    break;
-                case data === "dokkan battle" && pointCheck[4] === false:
-                    pointCheck[4] = true;
-                    score +=15
-                    break;
-                case data === "survey" && pointCheck[5] === false:
-                    pointCheck[5] = true;
-                    score +=20
-                    break;
-                default:
-                    data;
-                    break;
-            }
+            case data === "lolo et clecle <3" && pointCheck[0] === false:
+                pointCheck[0] = true;
+                score +=20
+                break;
+            case data === "merci" && pointCheck[1] === false:
+                pointCheck[1] = true;
+                score +=20
+                break;
+            case data === "bonjour" && pointCheck[2] === false:
+                pointCheck[2] = true;
+                score +=10
+                break;
+            case data === "bg" && pointCheck[3] === false:
+                pointCheck[3] = true;
+                score +=5
+                break;
+            case data === "dokkan battle" && pointCheck[4] === false:
+                pointCheck[4] = true;
+                score +=15
+                break;
+            case data === "survey" && pointCheck[5] === false:
+                pointCheck[5] = true;
+                score +=20
+                break;
+            default:
+                data;
+                break;
+        }
 
-            // Enleve des points à l'utilisateur si le texte contient des éléments de style
-            if (data.includes("[b]"))
-            {
-                score -= 5;
-            }
-            if (data.includes("[cr-b]"))
-            {
-                score -= 5;
-            }
+        // Enleve des points à l'utilisateur si le texte contient des éléments de style
+        if (data.includes("[b]"))
+        {
+            score -= 5;
+        }
+        if (data.includes("[cr-b]"))
+        {
+            score -= 5;
+        }
 
-            if(score > 0)
-            {
-                socket.emit('disable_checkbox',true);
-            }else
-            {
-                socket.emit('disable_checkbox',false);
-            }
+        if(score > 0)
+        {
+            socket.emit('disable_checkbox',true);
+        }
+        else
+        {
+            socket.emit('disable_checkbox',false);
+        }
 
-            socket.emit('point_view', 
-                {
-                    score:score
-                })
-        });	
+        socket.emit('point_view', 
+        {
+            score:score
+        })
+    });	
         
 
         
@@ -81,7 +83,8 @@ function handleNewConnection(socket, io)
 /**
  * Fonction s'occupant de styliser le text selon son contenu 
  */
-function replaceTag(message){
+function replaceTag(message)
+{
     message = message.replace("[b]", "<span class='bg-c'>");
     message = message.replace("[cr-b]", "<span class='cr-b'>");
     message = message.replace("[]", "</span>");

@@ -1,190 +1,186 @@
 #surveys{
-    position: absolute;
-    top: 262px;
-    right: 20px;
-    padding: 5px;
-    width: 400px;
+  position: absolute;
+  top: 262px;
+  right: 20px;
+  padding: 5px;
+  width: 400px;
 }
 
 .survey{
-    background-color: white;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    height: 225px;
+  background-color: white;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 225px;
 	border-radius:14px;
 }
 
 #surveyButton1{
-    min-width: 100px;
-    height: 40px;
-    color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border-radius: 5px;
-    z-index: 0;
-    background: #fff;
-    overflow: hidden;
-    border: 2px solid #798EA3;
-    color: #798EA3;
+  min-width: 100px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  z-index: 0;
+  background: #fff;
+  overflow: hidden;
+  border: 2px solid #798EA3;
+  color: #798EA3;
   }
-  #surveyButton1:hover {
-    color: #fff;
-  }
-  #surveyButton1:hover:after {
-    width: 100%;
-  }
-  #surveyButton1:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    transition: all 0.3s ease;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 100%;
-    background: #798EA3;
-  }
-
+#surveyButton1:hover {
+  color: #fff;
+}
+#surveyButton1:hover:after {
+  width: 100%;
+}
+#surveyButton1:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #798EA3;
+}
 
 #surveyButton2{
-    min-width: 100px;
-    height: 40px;
-    color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border-radius: 5px;
-    z-index: 0;
-    background: #fff;
-    overflow: hidden;
-    border: 2px solid #374757;
-    color: #374757;
+  min-width: 100px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  z-index: 0;
+  background: #fff;
+  overflow: hidden;
+  border: 2px solid #374757;
+  color: #374757;
   }
-  #surveyButton2:hover {
-    color: #fff;
-  }
-  #surveyButton2:hover:after {
-    width: 100%;
-  }
-  #surveyButton2:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    transition: all 0.3s ease;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 100%;
-    background: #374757;
-  }
+#surveyButton2:hover {
+  color: #fff;
+}
+#surveyButton2:hover:after {
+  width: 100%;
+}
+#surveyButton2:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #374757;
+}
 
 .Choices{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
 }
 
 #createSurvey{
-    background-color: white;
-    padding: 5px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    position: absolute;
-    top: 262px;
-    left: 150px;
-    border-radius:14px;
-
+  background-color: white;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 262px;
+  left: 150px;
+  border-radius:14px;
 }
 
 #createSurvey>input{
-    margin: 10px;
+  margin: 10px;
 }
 
 #input-create-survey{
-    min-width: 100px;
-    height: 40px;
-    color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border-radius: 5px;
-    z-index: 0;
-    background: #fff;
-    overflow: hidden;
-    border: 2px solid #374757;
-    color: #374757;
+  min-width: 100px;
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  z-index: 0;
+  background: #fff;
+  overflow: hidden;
+  border: 2px solid #374757;
+  color: #374757;
+}
+#input-create-survey:hover:after {
+  width: 100%;
+}
+#input-create-survey:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  transition: all 0.3s ease;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #374757;
 }
 
+.bar{
+  height: 30px;
+}
 
-  #input-create-survey:hover:after {
-    width: 100%;
-  }
-  #input-create-survey:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    transition: all 0.3s ease;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 100%;
-    background: #374757;
-  }
+#barNum1{
+  position: absolute;
+  right: 50%;
+  top: 75%;
+  transition: 2s;
+  background-color: #798EA3;
+  border: 1px solid transparent;
+  width: 25%;
+}
 
-  .bar{
-    height: 30px;
-  }
-  
-  #barNum1{
-    position: absolute;
-    right: 50%;
-    top: 75%;
-    transition: 2s;
-    background-color: #798EA3;
-    border: 1px solid transparent;
-    width: 25%;
+#barNum2{
+  position: absolute;
+  left: 50%;
+  top: 75%;
+  transition: 2s;
+  background-color: #374757;
+  border: 1px solid transparent;
+  width: 25%;
+}
 
-  }
-
-  #barNum2{
-    position: absolute;
-    left: 50%;
-    top: 75%;
-    transition: 2s;
-    background-color: #374757;
-    border: 1px solid transparent;
-    width: 25%;
-  }
 .graph{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .user{
-    font-size: 10px;
-    margin-top: -13px;
-    margin-bottom: 20px;
+  font-size: 10px;
+  margin-top: -13px;
+  margin-bottom: 20px;
 }
 
 #timer{
-    margin-bottom: -50px;
+  margin-bottom: -50px;
 }
