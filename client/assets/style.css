@@ -36,9 +36,10 @@ h1 {
 	border-top-left-radius:8px;
 	border-bottom-left-radius:8px;
 	border-right: solid 1px #eaeaea;
-        border-bottom: solid 2px #DDD;
+	border-bottom: solid 2px #DDD;
 	background:#eee;
 	text-align: left;
+	position: relative;
 }
 #messages .message {
 	padding:4px 20px;
