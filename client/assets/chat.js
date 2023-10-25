@@ -101,3 +101,26 @@ function currentBut(){
 
 currentBut();
 clicktheme();
+
+
+
+$("#buttun-start-target").click(() => {
+  console.log("test")
+  $("#target-conteneur").append(' <p class="target">👹​</p>');
+  $(".target").each(function(){
+    $(this).css({"left": Math.random() * window.outerWidth , "top": Math.random() * window.outerHeight});
+  });
+  startGameTarget()
+
+});
+
+function startGameTarget(){
+  $(".target").click(() => {
+      console.log("target")
+      $(".target").each(function(){
+          $(this).css({"left": Math.random() * window.outerWidth , "top": Math.random() * window.outerHeight});
+      });
+  
+  })
+  
+}

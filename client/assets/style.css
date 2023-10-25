@@ -59,6 +59,15 @@ h1 {
     background-color: red !important ;
 }
 
+.target{
+    position: absolute;
+    font-size: 100px;
+}
+
+.target:hover{
+	cursor: pointer;
+}
+
 #messages {
 	height:calc(100% - 15px - 60px); /* 15px = padding-top, 60px = formulaire en dessous  */
 	padding-top:15px;
