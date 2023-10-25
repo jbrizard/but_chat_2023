@@ -1,0 +1,38 @@
+.second_player #chessboard,
+.second_player #chessboard > #chessboard-grid > div
+{
+    transform: rotate(180deg);
+}
+
+.players {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f1f1f1d5;
+
+    border-right: 1px solid black;
+    color: black;
+    padding: 1rem 3rem;
+}
+
+.players > h1 {
+    color: inherit;
+}
+
+.players ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 1.3rem;
+}
+
+.players p {
+    margin: 0;
+    text-align: left;
+}
+
+@media screen and (min-width : 1000px) {
+    .players {
+        bottom: 0
+    }
+}

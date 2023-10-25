@@ -1,0 +1,5 @@
+.vscode
+
+server/node_modules/*
+
+!server/node_modules/readme.txt

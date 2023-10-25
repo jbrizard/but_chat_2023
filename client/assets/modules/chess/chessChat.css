@@ -1,0 +1,45 @@
+.chess_invitation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    background-color: rgb(255, 255, 255, .15);
+    backdrop-filter: blur(16px);
+    display: grid;
+    place-content: center;
+}
+
+.chess_invitation > div {
+    padding: 1.25rem 3.5rem;
+    background-color: #F1F1F1;
+    border: 1px solid black;
+    text-align: center;
+    display: grid;
+    gap: 2rem;
+    border-radius: 3px;
+}
+
+.chess_invitation > div > div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.chess_invitation button {
+	border:solid 2px #888;
+	padding: 1rem 1.5rem;
+	border-radius:8px;
+	transition: all .4s;
+    cursor: pointer;
+}
+
+.chess_invitation button:last-child {
+    background-color: rgb(168, 0, 0);
+    color: white;
+}
+
+.chess_invitation button:is(:hover, :focus-within) {
+    filter: brightness(.7);
+}
