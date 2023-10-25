@@ -1,0 +1,11 @@
+/* Module Daffy */
+.daffy {
+    background: url(daffy.gif) no-repeat;
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin: 0px 10px;
+    vertical-align: middle;
+	font-size:0;
+}

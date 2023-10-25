@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script> <!-- fichier injecté par NodeJS -->
+        
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="/modules/chess/chessGame.css" />
+        <script src="chess.js" defer></script>
+    </head>
+    <body>
+        <div id="chesstable-frame">
+            <aside class="players">
+                <h1>Les joueurs</h1>
+                <ul></ul>
+            </aside>
+            <div id="chesstable">
+                <div id="team-white">
+
+                </div>
+                <div id="chessboard">
+                    <div id="chessboard-grid">
+
+                    </div>
+                </div>
+                <div id="team-black">
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
