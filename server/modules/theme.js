@@ -6,7 +6,7 @@
 
 // Définit les méthodes "publiques" (utilisation à l'extérieur du module)
 module.exports =  {
-	handleTheme: handleTheme // permet d'appeler cette méthode dans server.js -> daffy.handleDaffy(...)
+	handleTheme: handleTheme // permet d'appeler cette méthode dans server.js -> theme.handleTheme(io, message)
 }
 
 /**
@@ -14,8 +14,6 @@ module.exports =  {
  */
 function handleTheme(io, message)
 {
-	// Passe le message en minuscules (recherche insensible à la casse)
-	message = message.toLowerCase();
 	
 	// Est-ce qu'il est égale à "666" ?
 	if (message == "666")
@@ -41,14 +39,14 @@ function handleTheme(io, message)
 	}
 	else if ( message == "desert")
 	{
-		// Si oui, le message est 🦇
+		// Si oui, le message est 🏜️
 		message = '<span class="desert">🏜️</span>';
 
         io.sockets.emit('change_theme', {theme:"desert", titre: "Sahara"});
 	}
 	else if ( message == "foret")
 	{
-		// Si oui, le message est 🦇
+		// Si oui, le message est 🌳
 		message = '<span class="foret">🌳</span>';
 
         io.sockets.emit('change_theme', {theme:"foret", titre: "Amazonie"});
